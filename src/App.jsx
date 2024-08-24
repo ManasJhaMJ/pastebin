@@ -14,6 +14,7 @@ function App() {
         <Route path="/" element={<PasteForm />} />
         <Route path="/:slug" element={<ViewPaste />} />
         <Route path="/find" element={<FindPaste />} />
+        <Route path="*" element={<ViewPaste />} />
       </Routes>
       <HowToUse />
       <Footer />
