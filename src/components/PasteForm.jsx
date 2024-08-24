@@ -13,17 +13,16 @@ function PasteForm() {
     const [error, setError] = useState('');
     const textareaRef = useRef(null);
 
-    // Function to handle text area resizing
     const adjustTextareaHeight = () => {
         const textarea = textareaRef.current;
         if (textarea) {
-            textarea.style.height = 'auto'; // Reset height to auto
-            textarea.style.height = `${textarea.scrollHeight}px`; // Set new height based on scroll height
+            textarea.style.height = 'auto';
+            textarea.style.height = `${textarea.scrollHeight}px`;
         }
     };
 
     useEffect(() => {
-        adjustTextareaHeight(); // Adjust height on text change
+        adjustTextareaHeight();
     }, [text]);
 
     const handleTextChange = (e) => {
@@ -33,7 +32,6 @@ function PasteForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Check if the slug already exists
         const slugRef = ref(db, `pastes/${slug}`);
         const snapshot = await get(slugRef);
         if (snapshot.exists()) {
@@ -41,19 +39,17 @@ function PasteForm() {
             return;
         }
 
-        // Save the paste to the database with the selected language
         set(slugRef, { text, language });
 
         setSlug('');
         setText('');
-        setLanguage('plaintext'); // Reset to default language
+        setLanguage('plaintext');
         setError('');
         alert(`Paste created! Share this link: /${slug}`);
         alert(`Paste created! Share this link: /${slug}`);
     };
 
     const handleSlugChange = (e) => {
-        // Remove spaces from the slug input
         const newSlug = e.target.value.replace(/\s+/g, '');
         setSlug(newSlug);
     };

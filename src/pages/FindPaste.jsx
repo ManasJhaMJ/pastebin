@@ -10,9 +10,9 @@ function FindPaste() {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
-        if (slug.trim()) { // Check if slug is not empty
-            navigate(`/${slug}`); // Navigate to the route with the entered slug
+        e.preventDefault();
+        if (slug.trim()) {
+            navigate(`/${slug}`);
         }
     };
 

@@ -22,7 +22,7 @@ function ViewPaste() {
             if (snapshot.exists()) {
                 const data = snapshot.val();
                 setPaste(data.text);
-                setLanguage(data.language || 'plaintext'); // Fallback to plaintext if no language is found
+                setLanguage(data.language || 'plaintext');
             } else {
                 setError('Paste not found / deleted.');
             }
@@ -35,7 +35,7 @@ function ViewPaste() {
         navigator.clipboard.writeText(paste)
             .then(() => {
                 setCopySuccess('Copied!');
-                setTimeout(() => setCopySuccess(''), 2000); // Reset the copy success message after 2 seconds
+                setTimeout(() => setCopySuccess(''), 3000);
             })
             .catch((err) => {
                 console.error('Failed to copy text: ', err);
