@@ -290,6 +290,31 @@ footer {
   border-top: 1px solid #333;
 }
 
+#findPaste {
+  background-color: #252525;
+  max-width: 1240px;
+  width: 90%;
+  margin: 0 auto;
+  min-height: 60vh;
+  height: fit-content;
+  padding: 1rem;
+}
+
+#findPaste input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 13px;
+  margin: 10px 0;
+  color: #ddd;
+  background-color: #2b2b2b;
+  border: 1px solid #333;
+  border-radius: 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+  resize: none;
+  transition: height 0.2s ease;
+}
+
 @media screen and (max-width: 600px) {
   nav {
     flex-direction: column;
