@@ -45,8 +45,7 @@ function PasteForm() {
         setText('');
         setLanguage('plaintext');
         setError('');
-        alert(`Paste created! Share this link: /${slug}`);
-        alert(`Paste created! Share this link: /${slug}`);
+        alert(`Paste created! Go to Find Paste and enter : ${slug}`);
     };
 
     const handleSlugChange = (e) => {
