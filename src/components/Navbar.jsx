@@ -9,7 +9,7 @@ function Navbar() {
         <nav>
             <span>
                 <SiPastebin size={30} />
-                <h1>PasteBin</h1>
+                <h1>InstaPaste</h1>
             </span>
 
             <span className="ul">
