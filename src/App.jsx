@@ -8,18 +8,16 @@ import HowToUse from './components/HowToUse';
 
 function App() {
   return (
-    <>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<PasteForm />} />
-          <Route path="/:slug" element={<ViewPaste />} />
-          <Route path="/find" element={<FindPaste />} />
-        </Routes>
-      </Router>
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<PasteForm />} />
+        <Route path="/:slug" element={<ViewPaste />} />
+        <Route path="/find" element={<FindPaste />} />
+      </Routes>
       <HowToUse />
       <Footer />
-    </>
+    </Router>
   );
 }
 
