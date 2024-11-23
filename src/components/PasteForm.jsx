@@ -5,11 +5,11 @@ import { db } from '../firebase';
 import { MdCreate } from "react-icons/md";
 import { GiInfo } from "react-icons/gi";
 
-
 function PasteForm() {
     const [slug, setSlug] = useState('');
     const [text, setText] = useState('');
     const [language, setLanguage] = useState('plaintext');
+    const [isPublic, setIsPublic] = useState(false); // New state for public option
     const [error, setError] = useState('');
     const textareaRef = useRef(null);
 
@@ -39,13 +39,15 @@ function PasteForm() {
             return;
         }
 
-        set(slugRef, { text, language });
+        // Save the paste with public visibility status
+        set(slugRef, { text, language, isPublic });
 
         setSlug('');
         setText('');
         setLanguage('plaintext');
+        setIsPublic(false); // Reset public status
         setError('');
-        alert(`Paste created! Go to Find Paste and enter : ${slug}`);
+        alert(`Paste created! Go to Find Paste and enter: ${slug}`);
     };
 
     const handleSlugChange = (e) => {
@@ -95,6 +97,18 @@ function PasteForm() {
                     <option value="cpp">C++</option>
                     <option value="c">C</option>
                 </select>
+                <br />
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={isPublic}
+                        onChange={() => setIsPublic(!isPublic)}
+                    />
+                    Make Public
+                </label>
+
+                <br />
+
                 {error && <p style={{ color: 'red' }} className="error">{error}</p>}
                 <button type="submit">
                     <MdCreate size={18} />

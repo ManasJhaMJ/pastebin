@@ -240,6 +240,7 @@ nav ul li {
   min-height: 60vh;
   height: fit-content;
   padding: 1rem;
+  position: relative;
 }
 
 button {
@@ -315,6 +316,59 @@ footer {
   transition: height 0.2s ease;
 }
 
+.copy-btn {
+  position: sticky;
+  top: 10px;
+  margin-left: 5px;
+}
+
+.public {
+  background-color: #262626;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 95%;
+  color: #d6d6d6;
+  min-height: 70vh;
+}
+
+.pastes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.paste-card {
+  background-color: #333;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  width: 220px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.paste-card h3 {
+  margin: 0;
+  padding: 0 1rem;
+}
+
+.paste-card p {
+  margin: 0;
+  font-size: 0.8rem;
+  margin-bottom: 40px;
+}
+
+.paste-card button {
+  position: absolute;
+  bottom: 10px;
+}
+
 @media screen and (max-width: 600px) {
   nav {
     flex-direction: column;
@@ -350,5 +404,17 @@ footer {
 
   .card {
     max-width: 90%;
+  }
+
+  .pastes-grid {
+    justify-content: center;
+  }
+
+  .paste-card {
+    width: 90%;
+  }
+
+  .paste-card button {
+    bottom: 5px;
   }
 }

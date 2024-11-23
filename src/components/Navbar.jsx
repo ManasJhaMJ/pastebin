@@ -2,6 +2,7 @@ import { SiPastebin } from "react-icons/si";
 import { FaPlus } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import { FaGlobeAsia } from "react-icons/fa";
 
 
 function Navbar() {
@@ -20,6 +21,10 @@ function Navbar() {
                 <NavLink to="find"><button className="btn02">
                     <FaSearch size={13} />
                     Find Paste
+                </button></NavLink>
+                <NavLink to="public"><button className="btn01">
+                    <FaGlobeAsia size={13} />
+                    Public
                 </button></NavLink>
             </span>
         </nav>

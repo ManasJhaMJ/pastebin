@@ -52,7 +52,7 @@ function ViewPaste() {
                 </div>
             ) : (
                 <div>
-                    <button onClick={handleCopy}>
+                    <button className='copy-btn' onClick={handleCopy}>
                         <FaRegCopy size={15} />
                         Copy
                     </button>
