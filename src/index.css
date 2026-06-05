@@ -322,6 +322,40 @@ footer {
   margin-left: 5px;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 3rem 1rem;
+  color: #aaa;
+}
+
+.loading p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #444;
+  border-top-color: #14b938;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.empty {
+  text-align: center;
+  color: #aaa;
+  padding: 2rem 1rem;
+}
+
 .public {
   background-color: #262626;
   padding: 0.5rem;
@@ -337,7 +371,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .paste-card {
@@ -345,23 +379,36 @@ footer {
   padding: 1rem 2rem;
   border-radius: 5px;
   width: 220px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 1rem;
   text-align: center;
   position: relative;
+  overflow: hidden;
 }
 
 .paste-card h3 {
   margin: 0;
   padding: 0 1rem;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .paste-card p {
   margin: 0;
   font-size: 0.8rem;
   margin-bottom: 40px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .paste-card button {

@@ -6,10 +6,12 @@ import Footer from './components/Footer';
 import FindPaste from './pages/FindPaste';
 import HowToUse from './components/HowToUse';
 import PublicPastes from './components/PublicPastes';
+import RouteTracker from './components/RouteTracker';
 
 function App() {
   return (
     <Router>
+      <RouteTracker />
       <Navbar />
       <Routes>
         <Route path="/" element={<PasteForm />} />

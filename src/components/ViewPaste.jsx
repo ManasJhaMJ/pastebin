@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ref, get } from 'firebase/database';
-import { db } from '../firebase';
+import { logEvent } from 'firebase/analytics';
+import { db, analytics } from '../firebase';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { FaRegCopy } from "react-icons/fa";
@@ -13,22 +14,39 @@ function ViewPaste() {
     const [paste, setPaste] = useState('');
     const [language, setLanguage] = useState('plaintext');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
     const [copySuccess, setCopySuccess] = useState('');
 
     useEffect(() => {
+        let cancelled = false;
         const fetchPaste = async () => {
+            setLoading(true);
+            setError('');
             const pasteRef = ref(db, `pastes/${slug}`);
-            const snapshot = await get(pasteRef);
-            if (snapshot.exists()) {
-                const data = snapshot.val();
-                setPaste(data.text);
-                setLanguage(data.language || 'plaintext');
-            } else {
-                setError('Paste not found / deleted.');
+            try {
+                const snapshot = await get(pasteRef);
+                if (cancelled) return;
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    setPaste(data.text);
+                    setLanguage(data.language || 'plaintext');
+                    logEvent(analytics, 'paste_view', {
+                        slug,
+                        language: data.language || 'plaintext',
+                    });
+                } else {
+                    logEvent(analytics, 'paste_not_found', { slug });
+                    setError('Paste not found / deleted.');
+                }
+            } catch (err) {
+                if (!cancelled) setError('Could not load paste. Please try again.');
+            } finally {
+                if (!cancelled) setLoading(false);
             }
         };
 
         fetchPaste();
+        return () => { cancelled = true; };
     }, [slug]);
 
     const handleCopy = () => {
@@ -45,7 +63,12 @@ function ViewPaste() {
 
     return (
         <div id='viewPaste'>
-            {error ? (
+            {loading ? (
+                <div className='loading'>
+                    <span className='spinner' />
+                    <p>Loading paste...</p>
+                </div>
+            ) : error ? (
                 <div className='error-div'>
                     <BiSolidError size={30} />
                     <p> {error}</p>

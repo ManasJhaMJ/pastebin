@@ -40,7 +40,7 @@ function PasteForm() {
         }
 
         // Save the paste with public visibility status
-        set(slugRef, { text, language, isPublic });
+        set(slugRef, { text, language, isPublic, createdAt: Date.now() });
 
         setSlug('');
         setText('');
@@ -51,7 +51,7 @@ function PasteForm() {
     };
 
     const handleSlugChange = (e) => {
-        const newSlug = e.target.value.replace(/\s+/g, '');
+        const newSlug = e.target.value.replace(/[^A-Za-z0-9_-]/g, '');
         setSlug(newSlug);
     };
 

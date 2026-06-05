@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /find
+
+Sitemap: https://binpaste.vercel.app/sitemap.xml
