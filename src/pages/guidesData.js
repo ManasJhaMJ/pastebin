@@ -7,10 +7,10 @@ export const GUIDES = [
         slug: 'how-to-share-code-online',
         title: 'How to share code online (the easy way)',
         description:
-            'A simple, free way to share code snippets online with a shareable link and syntax highlighting — no account required.',
+            'A simple, free way to share code snippets online with a shareable link and syntax highlighting - no account required.',
         sections: [
             {
-                p: 'Sharing code should take seconds, not sign-ups. This guide shows how to share a code snippet online with BinPaste — a free pastebin alternative — and get a clean shareable link with syntax highlighting.',
+                p: 'Sharing code should take seconds, not sign-ups. This guide shows how to share a code snippet online with BinPaste - a free pastebin alternative - and get a clean shareable link with syntax highlighting.',
             },
             {
                 h2: 'Step 1: Paste your code',
@@ -22,7 +22,7 @@ export const GUIDES = [
             },
             {
                 h2: 'Step 3: Share the link',
-                p: 'Create the paste — the link is copied to your clipboard automatically. Send it to anyone; they can view, copy, download, or open the raw text without an account.',
+                p: 'Create the paste - the link is copied to your clipboard automatically. Send it to anyone; they can view, copy, download, or open the raw text without an account.',
             },
         ],
     },
@@ -53,7 +53,7 @@ export const GUIDES = [
         slug: 'best-pastebin-alternative',
         title: 'The best free pastebin alternative in 2026',
         description:
-            'What to look for in a pastebin alternative — and why BinPaste is a fast, free, no-account option for sharing code and text.',
+            'What to look for in a pastebin alternative - and why BinPaste is a fast, free, no-account option for sharing code and text.',
         sections: [
             {
                 p: 'Not all pastebins are equal. A good pastebin alternative should be free, fast, and get out of your way. Here\'s what matters and how BinPaste compares.',
@@ -64,7 +64,7 @@ export const GUIDES = [
             },
             {
                 h2: 'Custom links you\'ll remember',
-                p: 'Instead of a random string of characters, BinPaste lets you name your paste — so the link is easy to share and recall.',
+                p: 'Instead of a random string of characters, BinPaste lets you name your paste - so the link is easy to share and recall.',
             },
             {
                 h2: 'Expiry, raw view, download, and QR',

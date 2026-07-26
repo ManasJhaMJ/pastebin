@@ -393,6 +393,14 @@ footer {
   color: #9ecbff;
 }
 
+.disclaimer-note {
+  max-width: 720px;
+  margin: 0.5rem auto;
+  font-size: 0.72rem;
+  color: #888;
+  line-height: 1.5;
+}
+
 #findPaste {
   background-color: #252525;
   max-width: 1240px;
@@ -461,7 +469,7 @@ footer {
   font-size: 0.9rem;
 }
 
-/* Paste name label, input, and random generator button — in one horizontal row. */
+/* Paste name label, input, and random generator button - in one horizontal row. */
 .slug-row {
   display: flex;
   flex-direction: row;

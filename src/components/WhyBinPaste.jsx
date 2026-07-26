@@ -1,11 +1,11 @@
 // src/components/WhyBinPaste.js
-// Visible homepage content — mirrors the FAQ/SoftwareApplication structured
+// Visible homepage content - mirrors the FAQ/SoftwareApplication structured
 // data in index.html so search engines and AI assistants have crawlable text.
 import { Link } from 'react-router-dom';
 import { GUIDES } from '../pages/guidesData';
 
 const FEATURES = [
-    ['Custom links', 'Pick your own name so your paste lives at a clean URL like www.binpaste.xyz/my-notes — or generate a random one.'],
+    ['Custom links', 'Pick your own name so your paste lives at a clean URL like www.binpaste.xyz/my-notes - or generate a random one.'],
     ['Syntax highlighting', 'Code is highlighted with line numbers for Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS.'],
     ['No account needed', 'No sign-up, no login. Open the site, paste, and share the link instantly.'],
     ['Expiring pastes', 'Set a paste to auto-expire after 10 minutes, an hour, a day, a week, or a month.'],
@@ -16,11 +16,11 @@ const FEATURES = [
 ];
 
 const FAQ = [
-    ['What is BinPaste?', 'BinPaste is a free, fast pastebin alternative for sharing code snippets and text online. Create a paste with a custom name, get an instant shareable link, and view it with syntax highlighting — no account required.'],
+    ['What is BinPaste?', 'BinPaste is a free, fast pastebin alternative for sharing code snippets and text online. Create a paste with a custom name, get an instant shareable link, and view it with syntax highlighting - no account required.'],
     ['Is BinPaste free to use?', 'Yes. BinPaste is completely free. You can create and share pastes without signing up or creating an account.'],
-    ['How is BinPaste a better pastebin alternative?', 'BinPaste lets you pick your own custom link for each paste, offers syntax highlighting for many languages, has a public pastes feed for discovery, supports one-click copy and download, and requires no account — a cleaner, faster experience than traditional pastebins.'],
+    ['How is BinPaste a better pastebin alternative?', 'BinPaste lets you pick your own custom link for each paste, offers syntax highlighting for many languages, has a public pastes feed for discovery, supports one-click copy and download, and requires no account - a cleaner, faster experience than traditional pastebins.'],
     ['Do I need an account to use BinPaste?', 'No. BinPaste requires no account or sign-up. Just open the site, paste your code or text, choose a custom name, and share the link.'],
-    ['Can I make a paste expire automatically?', 'Yes. When creating a paste you can choose an expiry — from 10 minutes up to a month — after which the paste is no longer accessible.'],
+    ['Can I make a paste expire automatically?', 'Yes. When creating a paste you can choose an expiry - from 10 minutes up to a month - after which the paste is no longer accessible.'],
     ['Can I view or download a paste as raw text?', 'Yes. Every paste has a raw plain-text view at /<name>/raw, and you can download the paste as a file with the correct extension in one click.'],
     ['Can I share a paste with a QR code?', 'Yes. Each paste page has a QR button that shows a scannable QR code, so you can open the paste on a phone or another device instantly.'],
     ['What languages does BinPaste highlight?', 'BinPaste highlights Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS, with line numbers for easy reading.'],
@@ -34,7 +34,7 @@ function WhyBinPaste() {
             <p className="lead">
                 BinPaste is a free, fast way to share code snippets and text online. Unlike cluttered,
                 ad-heavy pastebins, BinPaste keeps things clean: pick a custom link, get syntax
-                highlighting, and share instantly — no account required.
+                highlighting, and share instantly - no account required.
             </p>
 
             <div className="feature-grid">

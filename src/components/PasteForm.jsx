@@ -24,7 +24,7 @@ const SLUG_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const MAX_CHARS = 400000;
 
 function randomSlug() {
-    // 8–10 characters.
+    // 8-10 characters.
     const length = 8 + Math.floor(Math.random() * 3);
     let out = '';
     const values = new Uint32Array(length);

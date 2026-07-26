@@ -36,7 +36,7 @@ export default async function handler(req, res) {
     // Look up the paste to build a meaningful preview.
     let title = slug;
     let lang = '';
-    let description = 'View this paste on BinPaste — the better pastebin alternative.';
+    let description = 'View this paste on BinPaste - the better pastebin alternative.';
     try {
         const dbUrl = process.env.DATABASE_URL;
         if (dbUrl && slug) {
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
         // Ignore lookup failures; fall back to generic preview text.
     }
 
-    const pageTitle = `${title} — Paste on BinPaste`;
+    const pageTitle = `${title} | Paste on BinPaste`;
     const pageUrl = `${SITE}/${encodeURIComponent(slug)}`;
     const imageUrl = `${SITE}/api/og?title=${encodeURIComponent(title)}&lang=${encodeURIComponent(lang)}`;
 

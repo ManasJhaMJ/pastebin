@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 const COMPARISON = [
     ['Free to use', 'Yes', 'Yes'],
     ['No account required', 'Yes', 'Optional / prompted'],
-    ['Custom paste name / link', 'Yes — pick any name', 'Random ID only'],
+    ['Custom paste name / link', 'Yes - pick any name', 'Random ID only'],
     ['Random name generator', 'Yes', 'No'],
     ['Syntax highlighting', 'Yes', 'Yes'],
-    ['Expiring pastes', 'Yes — 10 min to 1 month', 'Yes'],
+    ['Expiring pastes', 'Yes - 10 min to 1 month', 'Yes'],
     ['Raw view & download', 'Yes', 'Yes'],
     ['QR code to share', 'Yes', 'No'],
     ['View counter', 'Yes', 'Yes'],
@@ -18,11 +18,11 @@ const COMPARISON = [
 function PastebinAlternative() {
     return (
         <article className="content-section">
-            <h1>BinPaste — a better Pastebin alternative</h1>
+            <h1>BinPaste - a better Pastebin alternative</h1>
             <p className="lead">
                 Looking for a Pastebin alternative that&apos;s fast, clean, and free? BinPaste lets you
                 share code snippets and text online with a custom link, syntax highlighting, expiring
-                pastes, and no account — a simpler experience than traditional pastebins.
+                pastes, and no account - a simpler experience than traditional pastebins.
             </p>
 
             <h2>BinPaste vs Pastebin.com</h2>
@@ -51,7 +51,7 @@ function PastebinAlternative() {
             <p>
                 BinPaste is built for quick, no-friction sharing. Paste your code or text, pick a
                 memorable link (or generate a random one), choose whether it should expire, and share.
-                There&apos;s no sign-up wall and no clutter — just your content with clean syntax
+                There&apos;s no sign-up wall and no clutter - just your content with clean syntax
                 highlighting.
             </p>
 

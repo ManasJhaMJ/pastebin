@@ -1,17 +1,17 @@
 # BinPaste
 
-**The better pastebin alternative.** A free, fast way to share **code snippets** and **text** online. Create a paste with a custom name, get a shareable link, and share temporary text or code with friends and teammates — no account required.
+**The better pastebin alternative.** A free, fast way to share **code snippets** and **text** online. Create a paste with a custom name, get a shareable link, and share temporary text or code with friends and teammates - no account required.
 
 Live: https://www.binpaste.xyz/
 
 ## Features
 
-- **Custom paste names** — pick your own slug, your paste lives at `www.binpaste.xyz/<your-name>`.
-- **Syntax highlighting** — Plain Text, JavaScript, Python, Java, C, C++, HTML, CSS via [`react-syntax-highlighter`](https://github.com/react-syntax-highlighter/react-syntax-highlighter).
-- **Public pastes feed** — opt-in to showcase a paste on the `/public` page (sorted newest first).
-- **One-click copy** — copy the entire paste content to your clipboard.
-- **No account required** — just open the site and paste.
-- **Anonymous analytics** — visitor-level tracking via Firebase Analytics with per-route `page_view` and `paste_view` events.
+- **Custom paste names** - pick your own slug, your paste lives at `www.binpaste.xyz/<your-name>`.
+- **Syntax highlighting** - Plain Text, JavaScript, Python, Java, C, C++, HTML, CSS via [`react-syntax-highlighter`](https://github.com/react-syntax-highlighter/react-syntax-highlighter).
+- **Public pastes feed** - opt-in to showcase a paste on the `/public` page (sorted newest first).
+- **One-click copy** - copy the entire paste content to your clipboard.
+- **No account required** - just open the site and paste.
+- **Anonymous analytics** - visitor-level tracking via Firebase Analytics with per-route `page_view` and `paste_view` events.
 
 ## Tech Stack
 
@@ -103,4 +103,4 @@ The project is configured for Vercel. A `vercel.json`-style SPA redirect is hand
 
 ## License
 
-All rights reserved &copy; 2024 — Manas Jha
+All rights reserved &copy; 2024 - Manas Jha

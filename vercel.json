@@ -1,7 +1,7 @@
 {
     "rewrites": [
         {
-            "source": "/((?!api/|find$|public$|guides$|pastebin-alternative$)[^/.]+)",
+            "source": "/((?!api/|find$|public$|guides$|pastebin-alternative$|terms$)[^/.]+)",
             "destination": "/api/paste-meta?slug=$1"
         },
         {

@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ref, get, remove } from 'firebase/database';
 import { db } from '../firebase';
 
-// Renders a paste as plain text only — no chrome, no highlighting.
+// Renders a paste as plain text only - no chrome, no highlighting.
 // Served at /:slug/raw so links can be shared/embedded as raw content.
 function RawPaste() {
     const { slug } = useParams();

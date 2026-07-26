@@ -7,7 +7,7 @@ function Guides() {
         <section className="content-section">
             <h1>BinPaste guides</h1>
             <p className="lead">
-                Tips and how-tos for sharing code, text, logs, and snippets online — free and without
+                Tips and how-tos for sharing code, text, logs, and snippets online - free and without
                 an account.
             </p>
             <ul className="guide-index">
