@@ -161,9 +161,10 @@ function PasteForm() {
                     <span>{text.length.toLocaleString()} / {MAX_CHARS.toLocaleString()} characters</span>
                     <span>{text ? text.split('\n').length.toLocaleString() : 0} lines</span>
                 </div>
-                <label htmlFor="input">Paste Name : </label>
-                <span className="slug-row">
+                <div className="slug-row">
+                    <label htmlFor="input">Paste Name : </label>
                     <input
+                        id="input"
                         type="text"
                         placeholder="Enter a unique name"
                         value={slug}
@@ -180,7 +181,7 @@ function PasteForm() {
                         <FaDice size={16} />
                         {generating ? 'Generating…' : 'Random'}
                     </button>
-                </span>
+                </div>
                 <p>This paste name will be used for the paste link!</p>
                 <label htmlFor="language">Code or Text : </label>
                 <select
@@ -209,7 +210,7 @@ function PasteForm() {
                     ))}
                 </select>
                 <br />
-                <label>
+                <label className="public-toggle">
                     <input
                         type="checkbox"
                         checked={isPublic}

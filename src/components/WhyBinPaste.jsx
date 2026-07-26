@@ -2,6 +2,7 @@
 // Visible homepage content — mirrors the FAQ/SoftwareApplication structured
 // data in index.html so search engines and AI assistants have crawlable text.
 import { Link } from 'react-router-dom';
+import { GUIDES } from '../pages/guidesData';
 
 const FEATURES = [
     ['Custom links', 'Pick your own name so your paste lives at a clean URL like binpaste.xyz/my-notes — or generate a random one.'],
@@ -55,9 +56,20 @@ function WhyBinPaste() {
                 ))}
             </div>
 
+            <h2 id="blogs">Helpful blogs</h2>
+            <div className="blog-grid">
+                {GUIDES.map((g) => (
+                    <Link className="blog-card" to={`/guides/${g.slug}`} key={g.slug}>
+                        <h3>{g.title}</h3>
+                        <p>{g.description}</p>
+                        <span className="blog-read">Read guide →</span>
+                    </Link>
+                ))}
+            </div>
             <p className="content-links">
-                Learn more: <Link to="/pastebin-alternative">BinPaste vs Pastebin.com</Link> ·{' '}
-                <Link to="/guides">Guides</Link> · <Link to="/public">Public pastes</Link>
+                <Link to="/guides">Browse all guides</Link> ·{' '}
+                <Link to="/pastebin-alternative">BinPaste vs Pastebin.com</Link> ·{' '}
+                <Link to="/public">Public pastes</Link>
             </p>
         </section>
     );

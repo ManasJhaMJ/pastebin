@@ -1,6 +1,10 @@
 {
     "rewrites": [
         {
+            "source": "/((?!api/|find$|public$|guides$|pastebin-alternative$)[^/.]+)",
+            "destination": "/api/paste-meta?slug=$1"
+        },
+        {
             "source": "/(.*)",
             "destination": "/"
         }
