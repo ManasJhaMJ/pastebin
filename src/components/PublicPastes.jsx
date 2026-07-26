@@ -46,15 +46,7 @@ function PublicPastes() {
                         <div key={paste.slug} className="paste-card">
                             <h3>{paste.slug}</h3>
                             <p>{paste.text.substring(0, 150)}...</p>
-                            <div className="paste-card-actions">
-                                <button onClick={() => navigate(`/${paste.slug}`)}>View</button>
-                                <a
-                                    className="report-link"
-                                    href={`mailto:work4manasjha@gmail.com?subject=${encodeURIComponent(`Report paste: ${paste.slug}`)}&body=${encodeURIComponent(`I'd like to report the paste at ${window.location.origin}/${paste.slug} for the following reason:\n\n`)}`}
-                                >
-                                    Report
-                                </a>
-                            </div>
+                            <button onClick={() => navigate(`/${paste.slug}`)}>View</button>
                         </div>
                     ))}
                 </div>

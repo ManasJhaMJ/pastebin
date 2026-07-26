@@ -11,6 +11,7 @@ const COMPARISON = [
     ['Expiring pastes', 'Yes — 10 min to 1 month', 'Yes'],
     ['Raw view & download', 'Yes', 'Yes'],
     ['QR code to share', 'Yes', 'No'],
+    ['View counter', 'Yes', 'Yes'],
     ['Clean, ad-light interface', 'Yes', 'Ad-heavy'],
 ];
 

@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 
 const FEATURES = [
     ['Custom links', 'Pick your own name so your paste lives at a clean URL like binpaste.xyz/my-notes — or generate a random one.'],
-    ['Syntax highlighting', 'Code is highlighted for JavaScript, Python, Java, C, C++, HTML, CSS and more.'],
+    ['Syntax highlighting', 'Code is highlighted with line numbers for Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS.'],
     ['No account needed', 'No sign-up, no login. Open the site, paste, and share the link instantly.'],
     ['Expiring pastes', 'Set a paste to auto-expire after 10 minutes, an hour, a day, a week, or a month.'],
     ['Raw & download', 'View any paste as raw plain text or download it as a file with one click.'],
+    ['QR sharing', 'Show a QR code for any paste to open it instantly on a phone or another device.'],
+    ['View counter', 'See how many times a paste has been viewed.'],
     ['Public feed', 'Optionally share a paste on the public feed for anyone to discover.'],
 ];
 
@@ -18,6 +20,10 @@ const FAQ = [
     ['How is BinPaste a better pastebin alternative?', 'BinPaste lets you pick your own custom link for each paste, offers syntax highlighting for many languages, has a public pastes feed for discovery, supports one-click copy and download, and requires no account — a cleaner, faster experience than traditional pastebins.'],
     ['Do I need an account to use BinPaste?', 'No. BinPaste requires no account or sign-up. Just open the site, paste your code or text, choose a custom name, and share the link.'],
     ['Can I make a paste expire automatically?', 'Yes. When creating a paste you can choose an expiry — from 10 minutes up to a month — after which the paste is no longer accessible.'],
+    ['Can I view or download a paste as raw text?', 'Yes. Every paste has a raw plain-text view at /<name>/raw, and you can download the paste as a file with the correct extension in one click.'],
+    ['Can I share a paste with a QR code?', 'Yes. Each paste page has a QR button that shows a scannable QR code, so you can open the paste on a phone or another device instantly.'],
+    ['What languages does BinPaste highlight?', 'BinPaste highlights Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS, with line numbers for easy reading.'],
+    ['How do I request removal of a paste?', 'Use the Report button on any paste, or email work4manasjha@gmail.com with the paste link, and it will be reviewed and removed.'],
 ];
 
 function WhyBinPaste() {

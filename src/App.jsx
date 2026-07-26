@@ -27,19 +27,23 @@ function App() {
   return (
     <Router>
       <RouteTracker />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/find" element={<FindPaste />} />
-        <Route path="/public" element={<PublicPastes />} />
-        <Route path="/pastebin-alternative" element={<PastebinAlternative />} />
-        <Route path="/guides" element={<Guides />} />
-        <Route path="/guides/:guideSlug" element={<Guide />} />
-        <Route path="/:slug/raw" element={<RawPaste />} />
-        <Route path="/:slug" element={<ViewPaste />} />
-        <Route path="*" element={<ViewPaste />} />
-      </Routes>
-      <Footer />
+      <div className="app-shell">
+        <Navbar />
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/find" element={<FindPaste />} />
+            <Route path="/public" element={<PublicPastes />} />
+            <Route path="/pastebin-alternative" element={<PastebinAlternative />} />
+            <Route path="/guides" element={<Guides />} />
+            <Route path="/guides/:guideSlug" element={<Guide />} />
+            <Route path="/:slug/raw" element={<RawPaste />} />
+            <Route path="/:slug" element={<ViewPaste />} />
+            <Route path="*" element={<ViewPaste />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </Router>
   );
 }

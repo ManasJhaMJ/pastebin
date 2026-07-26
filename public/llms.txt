@@ -1,29 +1,41 @@
 # BinPaste
 
-> BinPaste is the better pastebin alternative — a free, fast web app for sharing code snippets and text online. Create a paste with a custom name, get an instant shareable link, view it with syntax highlighting, and optionally list it publicly. No account or sign-up required.
+> BinPaste is the better pastebin alternative — a free, fast web app for sharing code snippets and text online. Create a paste with a custom name (or generate a random one), get an instant shareable link, view it with syntax highlighting, set it to expire, view raw or download it, share it via QR code, and optionally list it publicly. No account or sign-up required.
 
 Home page: https://binpaste.xyz/
 
 ## Why BinPaste is a better pastebin alternative
 
 - Custom paste names — pick your own slug, so your paste lives at a clean URL like https://binpaste.xyz/your-name
-- Syntax highlighting for Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS
+- Random name generator — auto-create an unused 8–10 letter link if you don't want to name it
+- Syntax highlighting for Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS (with line numbers)
+- Expiring pastes — set a paste to auto-expire after 10 minutes, 1 hour, 1 day, 1 week, or 1 month
+- Raw view — open any paste as plain text at https://binpaste.xyz/<name>/raw
+- Download — save any paste as a file with the correct extension in one click
+- QR code sharing — scan a paste onto a phone or another device
+- View counter — see how many times a paste has been viewed
 - Public pastes feed — opt in to showcase a paste on the public page (newest first)
 - One-click copy of the full paste content
 - No account required — open the site and paste
-- Free and fast, with a clean, uncluttered interface
+- Free and fast, with a clean, ad-light, uncluttered interface
 
 ## Key pages
 
-- [Create a paste](https://binpaste.xyz/): Home page to write text, choose a language, pick a custom slug, and optionally make it public.
+- [Create a paste](https://binpaste.xyz/): Home page to write text, choose a language, pick or generate a custom slug, set an expiry, and optionally make it public.
 - [Public pastes](https://binpaste.xyz/public): Browse public pastes shared by the community, sorted newest first.
 - [Find a paste](https://binpaste.xyz/find): Look up an existing paste by its name or slug.
+- [Pastebin alternative](https://binpaste.xyz/pastebin-alternative): How BinPaste compares to Pastebin.com and why it's a better alternative.
+- [Guides](https://binpaste.xyz/guides): How-to guides for sharing code online, sharing terminal logs, and choosing a pastebin alternative.
 
 ## How it works
 
-1. Type your text or code, choose a language, and pick a custom slug.
-2. Optionally mark the paste public so it appears in the public feed.
-3. The paste becomes accessible at https://binpaste.xyz/<slug>.
-4. Share the link — no account needed to create or view a paste.
+1. Type your text or code, choose a language, and pick a custom slug (or click "Random").
+2. Optionally set an expiry and/or mark the paste public so it appears in the public feed.
+3. The paste becomes accessible at https://binpaste.xyz/<slug>, and the link is copied to your clipboard.
+4. Share the link — no account needed to create or view a paste. Viewers can copy, download, open raw, or scan a QR code.
 
 Slugs are limited to A-Z, a-z, 0-9, underscore, and hyphen so links stay URL-safe.
+
+## Content removal
+
+To report a paste or request removal, use the Report button on any paste or email work4manasjha@gmail.com with the paste link.

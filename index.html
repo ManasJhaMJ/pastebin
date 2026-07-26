@@ -10,9 +10,9 @@
 
   <title>BinPaste — The Better Pastebin Alternative to Share Code &amp; Text</title>
   <meta name="description"
-    content="BinPaste is the better pastebin alternative — a free, fast, ad-light way to share code snippets and text online. Pick a custom link, get syntax highlighting, browse public pastes, and share instantly. No account, no clutter." />
+    content="BinPaste is the better pastebin alternative — a free, fast, ad-light way to share code snippets and text online. Pick a custom link, get syntax highlighting, set an expiry, view raw or download, share via QR, and browse public pastes. No account, no clutter." />
   <meta name="keywords"
-    content="binpaste, pastebin, pastebin alternative, best pastebin, better pastebin, pastebin.com alternative, free pastebin, online pastebin, paste bin, paste tool, paste website, paste site, paste service, code pastebin, text pastebin, modern pastebin, fast pastebin, clean pastebin, no ads pastebin, no account pastebin, no signup pastebin, anonymous pastebin, share code, share text, share code online, share text online, code sharing, text sharing, code sharing tool, paste code online, paste text online, upload code, upload text, temporary text, temporary paste, temporary text storage, disposable text, quick paste, instant paste, snippet sharing, code snippet, share snippet, snippet tool, save code online, store text online, paste link, shareable link, custom paste name, custom paste url, custom slug, custom link paste, named paste, vanity url paste, syntax highlighting, syntax highlighting pastebin, code highlighting, public pastes, public paste feed, browse public pastes, community pastes, one-click copy, copy paste online, share python code, share javascript code, share html code, share css code, share java code, share c code, share cpp code, share json, share logs, share error message, share config, share notes online, developer tools, coding tools, programming tools" />
+    content="binpaste, pastebin, pastebin alternative, best pastebin, better pastebin, pastebin.com alternative, free pastebin, online pastebin, paste bin, paste tool, paste website, paste site, paste service, code pastebin, text pastebin, modern pastebin, fast pastebin, clean pastebin, no ads pastebin, no account pastebin, no signup pastebin, anonymous pastebin, share code, share text, share code online, share text online, code sharing, text sharing, code sharing tool, paste code online, paste text online, upload code, upload text, temporary text, temporary paste, temporary text storage, disposable text, self destructing paste, expiring paste, paste with expiry, quick paste, instant paste, snippet sharing, code snippet, share snippet, snippet tool, save code online, store text online, paste link, shareable link, custom paste name, custom paste url, custom slug, custom link paste, named paste, vanity url paste, random paste name, syntax highlighting, syntax highlighting pastebin, code highlighting, public pastes, public paste feed, browse public pastes, community pastes, one-click copy, copy paste online, raw paste, raw text view, download paste, download code, qr code paste, share paste qr, share python code, share javascript code, share html code, share css code, share java code, share c code, share cpp code, share json, share logs, share error message, share config, share notes online, developer tools, coding tools, programming tools" />
   <meta name="author" content="Manas Jha" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#2b2b2b" />
@@ -29,7 +29,7 @@
   <meta property="og:site_name" content="BinPaste" />
   <meta property="og:title" content="BinPaste — The Better Pastebin Alternative to Share Code &amp; Text" />
   <meta property="og:description"
-    content="The better pastebin alternative. Share code and text instantly with a custom link, syntax highlighting, and public pastes — free, fast, and no account needed." />
+    content="The better pastebin alternative. Share code and text instantly with a custom link, syntax highlighting, expiring pastes, raw view, download, and QR sharing — free, fast, and no account needed." />
   <meta property="og:url" content="https://binpaste.xyz/" />
   <meta property="og:image" content="https://binpaste.xyz/logo.png" />
   <meta property="og:image:alt" content="BinPaste — the better pastebin alternative" />
@@ -39,7 +39,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="BinPaste — The Better Pastebin Alternative" />
   <meta name="twitter:description"
-    content="The better pastebin alternative — share code and text with custom links, syntax highlighting, and public pastes. Free, fast, no account." />
+    content="The better pastebin alternative — share code and text with custom links, syntax highlighting, expiring pastes, raw view, download, and QR sharing. Free, fast, no account." />
   <meta name="twitter:image" content="https://binpaste.xyz/logo.png" />
   <meta name="twitter:image:alt" content="BinPaste — the better pastebin alternative" />
 
@@ -51,7 +51,7 @@
     "name": "BinPaste",
     "alternateName": ["BinPaste Pastebin", "BinPaste — Pastebin Alternative"],
     "url": "https://binpaste.xyz/",
-    "description": "The better pastebin alternative — a free, fast way to share code snippets and text online with custom paste names, syntax highlighting, and public pastes.",
+    "description": "The better pastebin alternative — a free, fast way to share code snippets and text online with custom paste names, syntax highlighting, expiring pastes, raw view, download, QR sharing, and public pastes.",
     "potentialAction": {
       "@type": "SearchAction",
       "target": "https://binpaste.xyz/{search_term_string}",
@@ -70,12 +70,18 @@
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Any (Web)",
     "url": "https://binpaste.xyz/",
-    "description": "The better pastebin alternative — a free online tool for sharing code snippets and temporary text with custom links, syntax highlighting, and a public pastes feed. No account required.",
+    "description": "The better pastebin alternative — a free online tool for sharing code snippets and temporary text with custom links, syntax highlighting, expiring pastes, raw view, download, QR sharing, and a public pastes feed. No account required.",
     "featureList": [
       "Custom paste names / slugs",
+      "Random paste name generator",
       "Syntax highlighting for multiple languages",
+      "Expiring pastes (10 minutes to 1 month)",
+      "Raw plain-text view",
+      "Download paste as a file",
+      "QR code sharing",
       "Public pastes feed",
       "One-click copy",
+      "View counter",
       "No account required",
       "Instant shareable links"
     ],
@@ -135,6 +141,38 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. When creating a paste you can choose an expiry — from 10 minutes up to a month — after which the paste is no longer accessible."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I view or download a paste as raw text?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Every paste has a raw plain-text view at /<name>/raw, and you can download the paste as a file with the correct extension in one click."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I share a paste with a QR code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Each paste page has a QR button that shows a scannable QR code, so you can open the paste on a phone or another device instantly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What languages does BinPaste highlight?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BinPaste highlights Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS, with line numbers for easy reading."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I request removal of a paste?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use the Report button on any paste, or email work4manasjha@gmail.com with the paste link, and it will be reviewed and removed."
         }
       }
     ]

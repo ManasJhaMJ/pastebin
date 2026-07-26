@@ -13,6 +13,17 @@ body {
   color: white;
 }
 
+/* Sticky footer layout: shell fills the viewport, main grows to push footer down. */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1 0 auto;
+}
+
 button,
 input,
 select,
@@ -541,23 +552,6 @@ footer {
   text-align: center;
 }
 
-/* Public paste card actions + report link. */
-.paste-card-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.report-link {
-  font-size: 0.8rem;
-  color: #ff9b9b;
-  text-decoration: none;
-}
-
-.report-link:hover {
-  text-decoration: underline;
-}
-
 /* Report button + note on the paste view. */
 .report-btn {
   background-color: #4a2b2b;
@@ -792,40 +786,51 @@ footer {
 
 .public {
   background-color: #262626;
-  padding: 0.5rem;
-  border-radius: 5px;
-  margin: 0 auto;
-  margin-top: 1rem;
-  width: 95%;
+  border: 1px solid #333;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin: 2rem auto;
+  max-width: 1240px;
+  width: 90%;
+  box-sizing: border-box;
   color: #d6d6d6;
-  min-height: 70vh;
+  min-height: 60vh;
+}
+
+.public h1 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
 }
 
 .pastes-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
 }
 
 .paste-card {
-  background-color: #333;
-  padding: 1rem 2rem;
-  border-radius: 5px;
-  width: 220px;
+  background-color: #2f2f2f;
+  border: 1px solid #3a3a3a;
+  padding: 1.25rem;
+  border-radius: 12px;
   box-sizing: border-box;
   display: flex;
-  align-items: center;
   flex-direction: column;
-  gap: 1rem;
-  text-align: center;
-  position: relative;
+  gap: 0.75rem;
+  text-align: left;
   overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.paste-card:hover {
+  transform: translateY(-4px);
+  border-color: #14b938;
 }
 
 .paste-card h3 {
   margin: 0;
-  padding: 0 1rem;
+  color: #14b938;
+  font-size: 1.05rem;
   max-width: 100%;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -833,8 +838,10 @@ footer {
 
 .paste-card p {
   margin: 0;
-  font-size: 0.8rem;
-  margin-bottom: 40px;
+  flex: 1;
+  font-size: 0.82rem;
+  color: #bdbdbd;
+  line-height: 1.5;
   max-width: 100%;
   overflow-wrap: anywhere;
   word-break: break-word;
@@ -846,8 +853,8 @@ footer {
 }
 
 .paste-card button {
-  position: absolute;
-  bottom: 10px;
+  align-self: flex-start;
+  margin: 0;
 }
 
 @media screen and (max-width: 600px) {
@@ -888,14 +895,10 @@ footer {
   }
 
   .pastes-grid {
-    justify-content: center;
+    grid-template-columns: 1fr;
   }
 
-  .paste-card {
-    width: 90%;
-  }
-
-  .paste-card button {
-    bottom: 5px;
+  .public {
+    padding: 1rem;
   }
 }

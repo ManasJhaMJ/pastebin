@@ -14,7 +14,7 @@ function Footer() {
                 <a href="mailto:work4manasjha@gmail.com">work4manasjha@gmail.com</a>.
             </p>
             <p>
-                All Rights Reserved. &copy; 2024
+                All Rights Reserved. &copy; 2024-2026 BinPaste.
             </p>
             <p>
                 Made with ❤️ by <a href="https://github.com/manasjhamj">MJ</a>
