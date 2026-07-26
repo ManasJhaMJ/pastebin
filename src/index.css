@@ -317,9 +317,92 @@ footer {
 }
 
 .copy-btn {
+  margin-left: 5px;
+}
+
+/* Row of actions above a paste (Copy / Download / Raw). */
+.paste-actions {
   position: sticky;
   top: 10px;
-  margin-left: 5px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.raw-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #14b938;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.raw-link:hover {
+  background-color: #0f8f2b;
+}
+
+/* Confirmation shown after a paste is created. */
+.created-banner {
+  background-color: #14381c;
+  border: 1px solid #14b938;
+  color: #b7f5c4;
+  padding: 0.6rem 0.9rem;
+  border-radius: 5px;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+}
+
+/* Slug input + random generator button. */
+.slug-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.generate-btn {
+  margin-top: 1rem;
+  background-color: #333;
+  color: #ddd;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #444;
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.generate-btn:hover:not(:disabled) {
+  background-color: #444;
+}
+
+.generate-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.note a {
+  color: #7cc4ff;
+}
+
+/* Raw plain-text paste view. */
+.raw-view {
+  margin: 0;
+  padding: 1rem;
+  min-height: 100vh;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: #ddd;
+  background-color: #1e1e1e;
 }
 
 .loading {

@@ -1,0 +1,29 @@
+# BinPaste
+
+> BinPaste is the better pastebin alternative — a free, fast web app for sharing code snippets and text online. Create a paste with a custom name, get an instant shareable link, view it with syntax highlighting, and optionally list it publicly. No account or sign-up required.
+
+Home page: https://binpaste.xyz/
+
+## Why BinPaste is a better pastebin alternative
+
+- Custom paste names — pick your own slug, so your paste lives at a clean URL like https://binpaste.xyz/your-name
+- Syntax highlighting for Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS
+- Public pastes feed — opt in to showcase a paste on the public page (newest first)
+- One-click copy of the full paste content
+- No account required — open the site and paste
+- Free and fast, with a clean, uncluttered interface
+
+## Key pages
+
+- [Create a paste](https://binpaste.xyz/): Home page to write text, choose a language, pick a custom slug, and optionally make it public.
+- [Public pastes](https://binpaste.xyz/public): Browse public pastes shared by the community, sorted newest first.
+- [Find a paste](https://binpaste.xyz/find): Look up an existing paste by its name or slug.
+
+## How it works
+
+1. Type your text or code, choose a language, and pick a custom slug.
+2. Optionally mark the paste public so it appears in the public feed.
+3. The paste becomes accessible at https://binpaste.xyz/<slug>.
+4. Share the link — no account needed to create or view a paste.
+
+Slugs are limited to A-Z, a-z, 0-9, underscore, and hyphen so links stay URL-safe.

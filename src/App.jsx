@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PasteForm from './components/PasteForm';
 import ViewPaste from './components/ViewPaste';
+import RawPaste from './components/RawPaste';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FindPaste from './pages/FindPaste';
@@ -15,6 +16,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<PasteForm />} />
+        <Route path="/:slug/raw" element={<RawPaste />} />
         <Route path="/:slug" element={<ViewPaste />} />
         <Route path="/find" element={<FindPaste />} />
         <Route path="/public" element={<PublicPastes />} />

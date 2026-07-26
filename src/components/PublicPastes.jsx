@@ -14,8 +14,10 @@ function PublicPastes() {
         const unsubscribe = onValue(pastesRef, (snapshot) => {
             const data = snapshot.val();
             if (data) {
+                const now = Date.now();
                 const publicPastes = Object.entries(data)
                     .filter(([key, value]) => value.isPublic)
+                    .filter(([key, value]) => !value.expiresAt || value.expiresAt > now)
                     .map(([key, value]) => ({ slug: key, ...value }))
                     .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
                 setPastes(publicPastes);

@@ -6,13 +6,13 @@ import { analytics } from '../firebase';
 const USER_ID_KEY = 'binpaste_uid';
 
 const DEFAULT_DESCRIPTION =
-    'BinPaste is a free, fast pastebin for sharing code snippets and text online. Create a paste with a custom name, get a shareable link, and share temporary text or code with friends and teammates.';
+    'BinPaste is the better pastebin alternative — a free, fast way to share code snippets and text online. Create a paste with a custom name, get a shareable link, and share temporary text or code with friends and teammates. No account required.';
 
 const ROUTE_META = {
     '/': {
-        title: 'BinPaste — Free Pastebin to Share Code & Text Online',
+        title: 'BinPaste — The Better Pastebin Alternative to Share Code & Text',
         description:
-            'Create a new paste on BinPaste. Share code snippets and temporary text online with a custom name, syntax highlighting, and an instant shareable link.',
+            'Create a new paste on BinPaste, the better pastebin alternative. Share code snippets and text online with a custom name, syntax highlighting, and an instant shareable link — no account needed.',
     },
     '/find': {
         title: 'Find a Paste — BinPaste',
@@ -69,7 +69,7 @@ function applyRouteMeta(pathname) {
                 `View the paste "${slug}" on BinPaste — a free pastebin for sharing code snippets and text online.`
             );
         } else {
-            document.title = 'BinPaste — Free Pastebin to Share Code & Text';
+            document.title = 'BinPaste — The Better Pastebin Alternative';
             setMetaDescription(DEFAULT_DESCRIPTION);
         }
     }
