@@ -16,8 +16,8 @@ function PublicPastes() {
             if (data) {
                 const now = Date.now();
                 const publicPastes = Object.entries(data)
-                    .filter(([key, value]) => value.isPublic)
-                    .filter(([key, value]) => !value.expiresAt || value.expiresAt > now)
+                    .filter(([, value]) => value.isPublic)
+                    .filter(([, value]) => !value.expiresAt || value.expiresAt > now)
                     .map(([key, value]) => ({ slug: key, ...value }))
                     .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
                 setPastes(publicPastes);
@@ -46,7 +46,15 @@ function PublicPastes() {
                         <div key={paste.slug} className="paste-card">
                             <h3>{paste.slug}</h3>
                             <p>{paste.text.substring(0, 150)}...</p>
-                            <button onClick={() => navigate(`/${paste.slug}`)}>View</button>
+                            <div className="paste-card-actions">
+                                <button onClick={() => navigate(`/${paste.slug}`)}>View</button>
+                                <a
+                                    className="report-link"
+                                    href={`mailto:work4manasjha@gmail.com?subject=${encodeURIComponent(`Report paste: ${paste.slug}`)}&body=${encodeURIComponent(`I'd like to report the paste at ${window.location.origin}/${paste.slug} for the following reason:\n\n`)}`}
+                                >
+                                    Report
+                                </a>
+                            </div>
                         </div>
                     ))}
                 </div>

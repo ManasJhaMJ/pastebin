@@ -24,6 +24,16 @@ const ROUTE_META = {
         description:
             'Browse public pastes on BinPaste. Discover code snippets, text, and shared notes from the community, sorted by newest first.',
     },
+    '/pastebin-alternative': {
+        title: 'Pastebin Alternative — Why BinPaste is Better | BinPaste',
+        description:
+            'BinPaste is a free, fast pastebin alternative with custom links, syntax highlighting, expiring pastes, and no account. See how it compares to Pastebin.com.',
+    },
+    '/guides': {
+        title: 'Guides — How to Share Code & Text Online | BinPaste',
+        description:
+            'BinPaste guides: how to share code online, share terminal logs, and pick the best free pastebin alternative.',
+    },
 };
 
 function getOrCreateUserId() {
@@ -61,8 +71,12 @@ function applyRouteMeta(pathname) {
     if (known) {
         document.title = known.title;
         setMetaDescription(known.description);
+    } else if (pathname.startsWith('/guides/')) {
+        // Guide pages set their own descriptive titles below; keep a sensible default.
+        document.title = 'BinPaste Guide — Sharing Code & Text Online';
+        setMetaDescription(DEFAULT_DESCRIPTION);
     } else {
-        const slug = pathname.replace(/^\//, '');
+        const slug = pathname.replace(/^\//, '').replace(/\/raw$/, '');
         if (slug) {
             document.title = `${slug} — Paste on BinPaste`;
             setMetaDescription(

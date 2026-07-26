@@ -1,6 +1,6 @@
 // src/components/RawPaste.js
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { ref, get, remove } from 'firebase/database';
 import { db } from '../firebase';
 
@@ -32,7 +32,7 @@ function RawPaste() {
                     setContent('Paste not found / deleted.');
                     setStatus('error');
                 }
-            } catch (err) {
+            } catch {
                 if (!cancelled) {
                     setContent('Could not load paste. Please try again.');
                     setStatus('error');
@@ -43,12 +43,11 @@ function RawPaste() {
         return () => { cancelled = true; };
     }, [slug]);
 
-    if (status === 'loading') {
-        return <pre className='raw-view'>Loading…</pre>;
-    }
-
     return (
-        <pre className='raw-view'>{content}</pre>
+        <div className='raw-wrap'>
+            <Link className='raw-back' to={`/${slug}`}>← Back to paste</Link>
+            <pre className='raw-view'>{status === 'loading' ? 'Loading…' : content}</pre>
+        </div>
     );
 }
 

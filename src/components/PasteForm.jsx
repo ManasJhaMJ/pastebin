@@ -20,6 +20,9 @@ const EXPIRY_OPTIONS = [
 // Characters used for auto-generated slugs (letters only, per request).
 const SLUG_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
+// Maximum paste size (characters). Keeps documents small and Firebase happy.
+const MAX_CHARS = 400000;
+
 function randomSlug() {
     // 8–10 characters.
     const length = 8 + Math.floor(Math.random() * 3);
@@ -76,7 +79,7 @@ function PasteForm() {
                 }
             }
             setError('Could not generate a free name. Please try again.');
-        } catch (err) {
+        } catch {
             setError('Could not generate a name. Please try again.');
         } finally {
             setGenerating(false);
@@ -85,6 +88,12 @@ function PasteForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (text.length > MAX_CHARS) {
+            setError(`Paste is too large (${text.length.toLocaleString()} / ${MAX_CHARS.toLocaleString()} characters). Please shorten it.`);
+            return;
+        }
+
         setSubmitting(true);
         setError('');
 
@@ -108,7 +117,7 @@ function PasteForm() {
             // Copy the shareable link to the clipboard (best-effort).
             try {
                 await navigator.clipboard.writeText(`${window.location.origin}/${createdSlug}`);
-            } catch (_) {
+            } catch {
                 // Clipboard may be unavailable; the redirect still works.
             }
 
@@ -119,7 +128,7 @@ function PasteForm() {
             setIsPublic(false);
             setExpiry('never');
             navigate(`/${createdSlug}`, { state: { justCreated: true } });
-        } catch (err) {
+        } catch {
             setError('Could not create the paste. Please try again.');
             setSubmitting(false);
         }
@@ -148,6 +157,10 @@ function PasteForm() {
                     }}
                     required
                 />
+                <div className={`paste-stats${text.length > MAX_CHARS ? ' over-limit' : ''}`}>
+                    <span>{text.length.toLocaleString()} / {MAX_CHARS.toLocaleString()} characters</span>
+                    <span>{text ? text.split('\n').length.toLocaleString() : 0} lines</span>
+                </div>
                 <label htmlFor="input">Paste Name : </label>
                 <span className="slug-row">
                     <input
@@ -217,10 +230,10 @@ function PasteForm() {
             <span className='note'>
                 <GiInfo size={20} />
                 <p>
-                    A paste can't be edited once created. If you set an expiry, it stops being
+                    A paste can&apos;t be edited once created. If you set an expiry, it stops being
                     accessible after that time. Want a paste removed sooner? Email{' '}
                     <a href="mailto:work4manasjha@gmail.com">work4manasjha@gmail.com</a> with the
-                    paste link and we'll delete it.
+                    paste link and we&apos;ll delete it.
                 </p>
             </span>
         </section>

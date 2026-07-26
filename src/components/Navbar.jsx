@@ -1,4 +1,3 @@
-import { SiPastebin } from "react-icons/si";
 import { FaPlus } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -8,10 +7,10 @@ import { FaGlobeAsia } from "react-icons/fa";
 function Navbar() {
     return (
         <nav>
-            <span>
-                <SiPastebin size={30} />
+            <NavLink to="/" className="brand">
+                <img src="/logo.png" alt="BinPaste logo" className="brand-logo" />
                 <h1>BinPaste</h1>
-            </span>
+            </NavLink>
 
             <span className="ul">
                 <NavLink to="/"><button className="btn01">

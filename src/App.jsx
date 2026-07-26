@@ -6,8 +6,22 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import FindPaste from './pages/FindPaste';
 import HowToUse from './components/HowToUse';
+import WhyBinPaste from './components/WhyBinPaste';
 import PublicPastes from './components/PublicPastes';
+import PastebinAlternative from './pages/PastebinAlternative';
+import Guides from './pages/Guides';
+import Guide from './pages/Guide';
 import RouteTracker from './components/RouteTracker';
+
+function Home() {
+  return (
+    <>
+      <PasteForm />
+      <HowToUse />
+      <WhyBinPaste />
+    </>
+  );
+}
 
 function App() {
   return (
@@ -15,14 +29,16 @@ function App() {
       <RouteTracker />
       <Navbar />
       <Routes>
-        <Route path="/" element={<PasteForm />} />
-        <Route path="/:slug/raw" element={<RawPaste />} />
-        <Route path="/:slug" element={<ViewPaste />} />
+        <Route path="/" element={<Home />} />
         <Route path="/find" element={<FindPaste />} />
         <Route path="/public" element={<PublicPastes />} />
+        <Route path="/pastebin-alternative" element={<PastebinAlternative />} />
+        <Route path="/guides" element={<Guides />} />
+        <Route path="/guides/:guideSlug" element={<Guide />} />
+        <Route path="/:slug/raw" element={<RawPaste />} />
+        <Route path="/:slug" element={<ViewPaste />} />
         <Route path="*" element={<ViewPaste />} />
       </Routes>
-      <HowToUse />
       <Footer />
     </Router>
   );
