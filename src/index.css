@@ -509,6 +509,14 @@ footer {
   background-color: #1e1e1e;
 }
 
+/* Paste creation timestamp shown below a paste. */
+.paste-created {
+  margin: 0.75rem 0 0;
+  font-size: 0.8rem;
+  color: #888;
+  text-align: right;
+}
+
 /* Character / line counter under the paste textarea. */
 .paste-stats {
   display: flex;

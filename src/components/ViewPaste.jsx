@@ -22,6 +22,23 @@ const EXTENSIONS = {
     c: 'c',
 };
 
+// Format a millisecond timestamp as a readable date + time in the
+// viewer's local timezone, including the timezone abbreviation.
+function formatCreatedAt(ts) {
+    try {
+        return new Date(ts).toLocaleString(undefined, {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZoneName: 'short',
+        });
+    } catch {
+        return '';
+    }
+}
+
 function ViewPaste() {
     const { slug } = useParams();
     const location = useLocation();
@@ -31,6 +48,7 @@ function ViewPaste() {
     const [loading, setLoading] = useState(true);
     const [copySuccess, setCopySuccess] = useState('');
     const [views, setViews] = useState(null);
+    const [createdAt, setCreatedAt] = useState(null);
     const [showQr, setShowQr] = useState(false);
     const [showReport, setShowReport] = useState(false);
     // Set from the create flow so we can confirm the link was copied.
@@ -58,6 +76,7 @@ function ViewPaste() {
 
                     setPaste(data.text);
                     setLanguage(data.language || 'plaintext');
+                    setCreatedAt(data.createdAt || null);
                     logEvent(analytics, 'paste_view', {
                         slug,
                         language: data.language || 'plaintext',
@@ -194,6 +213,11 @@ function ViewPaste() {
                     >
                         {paste}
                     </SyntaxHighlighter>
+                    {createdAt && (
+                        <p className='paste-created'>
+                            Created on {formatCreatedAt(createdAt)} (your local time)
+                        </p>
+                    )}
                 </div>
             )}
         </div>
