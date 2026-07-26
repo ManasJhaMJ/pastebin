@@ -85,7 +85,7 @@ export default function handler(req) {
                 </div>
 
                 <div style={{ color: '#9a9a9a', fontSize: '30px', display: 'flex' }}>
-                    The better pastebin alternative · binpaste.xyz
+                    The better pastebin alternative · www.binpaste.xyz
                 </div>
             </div>
         ),

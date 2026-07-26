@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { GUIDES } from '../pages/guidesData';
 
 const FEATURES = [
-    ['Custom links', 'Pick your own name so your paste lives at a clean URL like binpaste.xyz/my-notes — or generate a random one.'],
+    ['Custom links', 'Pick your own name so your paste lives at a clean URL like www.binpaste.xyz/my-notes — or generate a random one.'],
     ['Syntax highlighting', 'Code is highlighted with line numbers for Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS.'],
     ['No account needed', 'No sign-up, no login. Open the site, paste, and share the link instantly.'],
     ['Expiring pastes', 'Set a paste to auto-expire after 10 minutes, an hour, a day, a week, or a month.'],

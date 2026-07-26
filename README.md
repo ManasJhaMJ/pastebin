@@ -2,11 +2,11 @@
 
 **The better pastebin alternative.** A free, fast way to share **code snippets** and **text** online. Create a paste with a custom name, get a shareable link, and share temporary text or code with friends and teammates — no account required.
 
-Live: https://binpaste.xyz/
+Live: https://www.binpaste.xyz/
 
 ## Features
 
-- **Custom paste names** — pick your own slug, your paste lives at `binpaste.xyz/<your-name>`.
+- **Custom paste names** — pick your own slug, your paste lives at `www.binpaste.xyz/<your-name>`.
 - **Syntax highlighting** — Plain Text, JavaScript, Python, Java, C, C++, HTML, CSS via [`react-syntax-highlighter`](https://github.com/react-syntax-highlighter/react-syntax-highlighter).
 - **Public pastes feed** — opt-in to showcase a paste on the `/public` page (sorted newest first).
 - **One-click copy** — copy the entire paste content to your clipboard.

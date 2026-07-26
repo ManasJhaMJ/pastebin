@@ -5,7 +5,7 @@
 // Requires the DATABASE_URL env var (Firebase Realtime DB URL) to be set in
 // the Vercel project settings.
 
-const SITE = 'https://binpaste.xyz';
+const SITE = 'https://www.binpaste.xyz';
 
 function escapeHtml(str) {
     return String(str)
@@ -17,7 +17,7 @@ function escapeHtml(str) {
 
 export default async function handler(req, res) {
     const slug = (req.query.slug || '').toString();
-    const host = req.headers.host || 'binpaste.xyz';
+    const host = req.headers.host || 'www.binpaste.xyz';
     const proto = (req.headers['x-forwarded-proto'] || 'https').toString().split(',')[0];
     const origin = `${proto}://${host}`;
 

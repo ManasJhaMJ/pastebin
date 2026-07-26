@@ -1,5 +1,5 @@
 # BinPaste — the better pastebin alternative
-# https://binpaste.xyz
+# https://www.binpaste.xyz
 
 User-agent: *
 Allow: /
@@ -58,4 +58,4 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-Sitemap: https://binpaste.xyz/sitemap.xml
+Sitemap: https://www.binpaste.xyz/sitemap.xml
