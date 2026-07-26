@@ -185,6 +185,7 @@ function PasteForm() {
                 <p>This paste name will be used for the paste link!</p>
                 <label htmlFor="language">Code or Text : </label>
                 <select
+                    id="language"
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
                     required

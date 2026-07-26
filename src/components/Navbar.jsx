@@ -10,7 +10,7 @@ function Navbar() {
             <NavLink to="/" className="brand">
                 <img src="/logo.png" alt="BinPaste logo" className="brand-logo" />
                 <span className="brand-text">
-                    <h1>BinPaste</h1>
+                    <span className="brand-name">BinPaste</span>
                     <span className="brand-tagline">The better pastebin alternative - share code &amp; text instantly.</span>
                 </span>
             </NavLink>
