@@ -5,6 +5,7 @@ import { ref, get, remove, runTransaction } from 'firebase/database';
 import { logEvent } from 'firebase/analytics';
 import { QRCodeSVG } from 'qrcode.react';
 import { db, analytics } from '../firebase';
+import { incrementTotalViews } from '../stats';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { FaRegCopy, FaDownload, FaFileAlt, FaQrcode, FaEye, FaFlag } from "react-icons/fa";
@@ -82,7 +83,10 @@ function ViewPaste() {
                         language: data.language || 'plaintext',
                     });
 
-                    // Increment a persistent view counter (best-effort).
+                    // Bump the lifetime view counter (persists even if this paste is later deleted).
+                    incrementTotalViews();
+
+                    // Increment a persistent per-paste view counter (best-effort).
                     runTransaction(ref(db, `pastes/${slug}/views`), (current) => (current || 0) + 1)
                         .then((res) => {
                             if (!cancelled && res.committed) {

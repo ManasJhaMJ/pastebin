@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import { ref, set, get } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
+import { incrementTotalPastes } from '../stats';
 import { MdCreate } from "react-icons/md";
 import { GiInfo } from "react-icons/gi";
 import { FaDice } from "react-icons/fa";
@@ -111,6 +112,9 @@ function PasteForm() {
 
             // Save the paste with public visibility status and optional expiry.
             await set(slugRef, { text, language, isPublic, createdAt, expiresAt });
+
+            // Bump the lifetime paste counter (persists even if this paste is later deleted).
+            incrementTotalPastes();
 
             const createdSlug = slug;
 

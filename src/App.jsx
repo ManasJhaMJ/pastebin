@@ -4,6 +4,7 @@ import PasteForm from './components/PasteForm';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import HowToUse from './components/HowToUse';
+import Stats from './components/Stats';
 import WhyBinPaste from './components/WhyBinPaste';
 import RouteTracker from './components/RouteTracker';
 
@@ -22,6 +23,7 @@ function Home() {
   return (
     <>
       <PasteForm />
+      <Stats />
       <HowToUse />
       <WhyBinPaste />
     </>

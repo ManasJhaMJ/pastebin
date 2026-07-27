@@ -3,6 +3,7 @@
 // data in index.html so search engines and AI assistants have crawlable text.
 import { Link } from 'react-router-dom';
 import { GUIDES } from '../pages/guidesData';
+import { UPDATES } from './changelog';
 
 const FEATURES = [
     ['Custom links', 'Pick your own name so your paste lives at a clean URL like www.binpaste.xyz/my-notes - or generate a random one.'],
@@ -66,6 +67,16 @@ function WhyBinPaste() {
                     </Link>
                 ))}
             </div>
+            <h2 id="updates">Dev updates</h2>
+            <ul className="updates-list">
+                {UPDATES.map((u, i) => (
+                    <li className="update-item" key={i}>
+                        <span className="update-date">{u.date}</span>
+                        <span className="update-text">{u.text}</span>
+                    </li>
+                ))}
+            </ul>
+
             <p className="content-links">
                 <Link to="/guides">Browse all guides</Link> ·{' '}
                 <Link to="/pastebin-alternative">BinPaste vs Pastebin.com</Link> ·{' '}

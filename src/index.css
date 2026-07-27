@@ -260,6 +260,36 @@ nav ul li {
   line-height: 1.5;
 }
 
+/* Lifetime usage stats bar. */
+.stats-bar {
+  max-width: 1240px;
+  margin: 2.5rem auto 0;
+  padding: 0 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+}
+
+.stats-bar .stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.stats-bar .stat-num {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #14b938;
+  line-height: 1;
+}
+
+.stats-bar .stat-label {
+  font-size: 0.85rem;
+  color: #9a9a9a;
+}
+
 #howtouse {
   max-width: 1240px;
   margin: 3.5rem auto 0;
@@ -754,6 +784,52 @@ footer {
 .content-section a.blog-card {
   color: #ddd;
   text-decoration: none;
+}
+
+/* Dev updates / changelog list. */
+.updates-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.update-item {
+  display: flex;
+  gap: 1rem;
+  align-items: baseline;
+  background: #2b2b2b;
+  border: 1px solid #383838;
+  border-left: 3px solid #14b938;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.update-date {
+  flex-shrink: 0;
+  width: 96px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #14b938;
+}
+
+.update-text {
+  font-size: 0.9rem;
+  color: #cfcfcf;
+  line-height: 1.5;
+}
+
+@media screen and (max-width: 500px) {
+  .update-item {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .update-date {
+    width: auto;
+  }
 }
 
 .feature-grid {
