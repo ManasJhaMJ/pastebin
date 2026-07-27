@@ -3,7 +3,7 @@
 export const UPDATES = [
     {
         date: 'Jul 27, 2026',
-        text: 'Added a live counter of total pastes created, plus a QR code and creation time on every paste.',
+        text: 'Added a live counter of total views on a paste , plus a QR code and creation time on every paste.',
     },
     {
         date: 'Jul 26, 2026',
