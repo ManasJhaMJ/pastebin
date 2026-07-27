@@ -15,15 +15,17 @@ function Stats() {
     }, []);
 
     // Don't render anything until we have a real number to show.
-    if (!stats || stats.totalPastes === 0) {
+    // NOTE: "pastes created" is intentionally hidden for now — showing total
+    // views instead. To restore it, add the totalPastes stat block back.
+    if (!stats || stats.totalViews === 0) {
         return null;
     }
 
     return (
         <section className="stats-bar" aria-label="BinPaste usage stats">
             <div className="stat">
-                <span className="stat-num">{stats.totalPastes.toLocaleString()}</span>
-                <span className="stat-label">pastes created</span>
+                <span className="stat-num">{stats.totalViews.toLocaleString()}</span>
+                <span className="stat-label">pastes viewed</span>
             </div>
         </section>
     );
