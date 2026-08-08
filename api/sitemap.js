@@ -26,6 +26,7 @@ const STATIC_PAGES = [
     { path: 'terms', changefreq: 'yearly', priority: '0.3' },
     { path: 'guides/how-to-share-code-online', changefreq: 'monthly', priority: '0.6' },
     { path: 'guides/how-to-share-terminal-logs', changefreq: 'monthly', priority: '0.6' },
+    { path: 'guides/copy-paste-text-between-devices', changefreq: 'monthly', priority: '0.6' },
     { path: 'guides/best-pastebin-alternative', changefreq: 'monthly', priority: '0.6' },
 ];
 

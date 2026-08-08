@@ -50,6 +50,45 @@ export const GUIDES = [
         ],
     },
     {
+        slug: 'copy-paste-text-between-devices',
+        title: 'How to copy and paste text between devices',
+        description:
+            'Copy and paste text or code between your phone, laptop, and any other device using a link - no app, no cable, and no account.',
+        sections: [
+            {
+                p: 'Getting a block of text from your phone to your laptop (or the other way round) is more annoying than it should be. Emailing yourself works, but it clutters your inbox. This guide shows how to copy and paste text between devices using BinPaste as a simple online clipboard - free, and with nothing to install.',
+            },
+            {
+                h2: 'Why not just email or message yourself?',
+                p: 'Self-messaging mangles formatting, wraps long lines, and sometimes turns things into links. It is also awkward for code and impossible on a device you are not signed in on. A paste link keeps the text exactly as you typed it and opens anywhere with a browser.',
+            },
+            {
+                h2: 'Step 1: Paste the text on the first device',
+                p: 'Open BinPaste, paste your text or code into the box, and pick a language if it is code (or leave it as Plain Text). Everything is preserved as-is, including line breaks and indentation.',
+            },
+            {
+                h2: 'Step 2: Give it a name you can type from memory',
+                p: 'This is the trick that makes cross-device copying painless. Choose a short custom name like "mynotes" and your paste lives at binpaste.xyz/mynotes. On the other device you just type that URL - no need to send a link anywhere at all.',
+            },
+            {
+                h2: 'Step 3: Open it on the other device',
+                p: 'On your phone, tablet, or another computer, open the link and tap Copy to put the whole thing on that device\'s clipboard. You can also use the Raw view for plain text, or Download to save it as a file with the right extension.',
+            },
+            {
+                h2: 'Skip the typing with a QR code',
+                p: 'If you are moving text from a computer to a phone, press the QR button on the paste page and scan it with your camera. The paste opens on your phone instantly - no typing and no cable.',
+            },
+            {
+                h2: 'Clean up after yourself',
+                p: 'For anything you only need once, set an expiry when you create the paste - from 10 minutes up to a month - and it stops being accessible on its own. Handy for one-off transfers you would rather not leave lying around.',
+            },
+            {
+                h2: 'A note on sensitive text',
+                p: 'A paste link is accessible to anyone who has it, so treat it like a shared clipboard rather than a private vault. Do not use it for passwords, API keys, or personal data, and leave "Make Public" unchecked unless you actually want the paste listed publicly.',
+            },
+        ],
+    },
+    {
         slug: 'best-pastebin-alternative',
         title: 'The best free pastebin alternative in 2026',
         description:

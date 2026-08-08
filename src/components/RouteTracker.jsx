@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { logEvent, setUserId, setUserProperties } from 'firebase/analytics';
 import { analytics } from '../firebase';
+import { getGuide } from '../pages/guidesData';
 
 const USER_ID_KEY = 'binpaste_uid';
 
@@ -114,9 +115,16 @@ function applyRouteMeta(pathname) {
         document.title = known.title;
         setMetaDescription(known.description);
     } else if (pathname.startsWith('/guides/')) {
-        // Guide pages set their own descriptive titles below; keep a sensible default.
-        document.title = 'BinPaste Guide | Sharing Code & Text Online';
-        setMetaDescription(DEFAULT_DESCRIPTION);
+        // Use the guide's own title/description so each guide has distinct meta
+        // rather than one shared generic string.
+        const guide = getGuide(pathname.replace('/guides/', ''));
+        if (guide) {
+            document.title = `${guide.title} | BinPaste`;
+            setMetaDescription(guide.description);
+        } else {
+            document.title = 'BinPaste Guide | Sharing Code & Text Online';
+            setMetaDescription(DEFAULT_DESCRIPTION);
+        }
     } else {
         const slug = pathname.replace(/^\//, '').replace(/\/raw$/, '');
         if (slug) {

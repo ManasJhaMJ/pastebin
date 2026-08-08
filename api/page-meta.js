@@ -56,6 +56,11 @@ const ROUTE_META = {
         description:
             'Share terminal output, stack traces, and error logs with a clean link instead of pasting walls of text into chat.',
     },
+    'guides/copy-paste-text-between-devices': {
+        title: 'How to Copy and Paste Text Between Devices | BinPaste',
+        description:
+            'Copy and paste text or code between your phone, laptop, and any other device using a link - no app, no cable, and no account.',
+    },
     'guides/best-pastebin-alternative': {
         title: 'The Best Free Pastebin Alternative in 2026 | BinPaste',
         description:

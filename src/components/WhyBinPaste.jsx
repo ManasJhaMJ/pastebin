@@ -24,6 +24,7 @@ const FAQ = [
     ['Can I make a paste expire automatically?', 'Yes. When creating a paste you can choose an expiry - from 10 minutes up to a month - after which the paste is no longer accessible.'],
     ['Can I view or download a paste as raw text?', 'Yes. Every paste has a raw plain-text view at /<name>/raw, and you can download the paste as a file with the correct extension in one click.'],
     ['Can I share a paste with a QR code?', 'Yes. Each paste page has a QR button that shows a scannable QR code, so you can open the paste on a phone or another device instantly.'],
+    ['Can I use BinPaste to copy and paste text between devices?', 'Yes. BinPaste works well as a simple online clipboard: paste your text on one device, give it a short custom name, then open that link on your phone or another computer and tap Copy. You can also scan the QR code instead of typing the link. Avoid pasting passwords or other sensitive data, since anyone with the link can open it.'],
     ['What languages does BinPaste highlight?', 'BinPaste highlights Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS, with line numbers for easy reading.'],
     ['How do I request removal of a paste?', 'Use the Report button on any paste, or email work4manasjha@gmail.com with the paste link, and it will be reviewed and removed.'],
 ];
