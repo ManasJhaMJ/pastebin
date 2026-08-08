@@ -3,7 +3,10 @@
 
 User-agent: *
 Allow: /
-Disallow: /find
+
+# /find is a lookup form with nothing to index. It is served with a
+# "noindex, follow" robots meta tag instead of being blocked here - a
+# Disallow rule would stop crawlers from ever reading that tag.
 
 # Search engines
 User-agent: Googlebot

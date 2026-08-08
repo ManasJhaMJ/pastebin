@@ -9,6 +9,18 @@
     ],
     "rewrites": [
         {
+            "source": "/sitemap.xml",
+            "destination": "/api/sitemap"
+        },
+        {
+            "source": "/(find|public|guides|pastebin-alternative|terms)",
+            "destination": "/api/page-meta?path=$1"
+        },
+        {
+            "source": "/guides/([^/.]+)",
+            "destination": "/api/page-meta?path=guides/$1"
+        },
+        {
             "source": "/((?!api/|find$|public$|guides$|pastebin-alternative$|terms$)[^/.]+)",
             "destination": "/api/paste-meta?slug=$1"
         },

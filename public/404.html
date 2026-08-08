@@ -1,12 +1,17 @@
 <!-- public/404.html -->
+<!--
+  NOTE: This page must NOT auto-redirect. A <meta http-equiv="refresh"> here
+  made Googlebot report "Page with redirect" for /404.html and skip indexing.
+  It is also marked noindex so it never competes with real pages.
+-->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Not Found</title>
-    <meta http-equiv="refresh" content="1;url=/" />
+    <title>Page not found | BinPaste</title>
+    <meta name="robots" content="noindex, follow">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -39,7 +44,7 @@
 
 <body>
     <h1>Oops!</h1>
-    <p>Please go back to the homepage and then to the Find Paste option.</p>
+    <p>We couldn&rsquo;t find that page. Try the Find Paste option from the homepage.</p>
     <a href="/">Go back to the homepage</a>
 </body>
 

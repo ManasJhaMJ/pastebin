@@ -2,12 +2,11 @@
 import { useState, useEffect } from 'react';
 import { ref, onValue } from 'firebase/database';
 import { db } from '../firebase';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function PublicPastes() {
     const [pastes, setPastes] = useState([]);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const pastesRef = ref(db, 'pastes');
@@ -46,7 +45,9 @@ function PublicPastes() {
                         <div key={paste.slug} className="paste-card">
                             <h3>{paste.slug}</h3>
                             <p>{paste.text.substring(0, 150)}...</p>
-                            <button onClick={() => navigate(`/${paste.slug}`)}>View</button>
+                            {/* A real <a href> (not navigate()) so crawlers can
+                                discover and follow public paste pages. */}
+                            <Link to={`/${paste.slug}`}>View</Link>
                         </div>
                     ))}
                 </div>

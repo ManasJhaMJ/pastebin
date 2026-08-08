@@ -1059,9 +1059,27 @@ footer {
   overflow: hidden;
 }
 
-.paste-card button {
+.paste-card button,
+.paste-card>a {
   align-self: flex-start;
   margin: 0;
+}
+
+/* The "View" control is a real link (so crawlers can follow it) styled to
+   match the buttons it replaced. */
+.paste-card>a {
+  padding: 5px 10px;
+  font-size: 14px;
+  background-color: #14b938;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.paste-card>a:hover {
+  background-color: #0f9c2e;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 600px) {

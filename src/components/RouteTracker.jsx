@@ -5,6 +5,9 @@ import { analytics } from '../firebase';
 
 const USER_ID_KEY = 'binpaste_uid';
 
+// Canonical URLs must use the www host; binpaste.xyz permanently redirects to it.
+const CANONICAL_ORIGIN = 'https://www.binpaste.xyz';
+
 const DEFAULT_DESCRIPTION =
     'BinPaste is the better pastebin alternative - a free, fast way to share code snippets and text online. Create a paste with a custom name, get a shareable link, and share temporary text or code with friends and teammates. No account required.';
 
@@ -71,6 +74,40 @@ function setCanonical(href) {
     tag.setAttribute('href', href);
 }
 
+function setRobots(content) {
+    let tag = document.querySelector('meta[name="robots"]');
+    if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('name', 'robots');
+        document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', content);
+}
+
+// Static routes that are always safe to index.
+const INDEXABLE_PATHS = new Set([
+    '/',
+    '/public',
+    '/pastebin-alternative',
+    '/guides',
+    '/terms',
+]);
+
+// Paste pages (/:slug) are a special case: whether they may be indexed depends
+// on the paste's isPublic flag, which only the server knows when it renders the
+// shell (see api/paste-meta.js). So we must NOT touch the robots tag on those
+// routes - overwriting it here would clobber the server's decision. Raw views
+// and /find are never indexable.
+function robotsPolicy(pathname) {
+    if (INDEXABLE_PATHS.has(pathname) || pathname.startsWith('/guides/')) {
+        return 'index';
+    }
+    if (pathname === '/find' || pathname.endsWith('/raw')) {
+        return 'noindex';
+    }
+    return 'leave-as-is'; // /:slug - decided server-side
+}
+
 function applyRouteMeta(pathname) {
     const known = ROUTE_META[pathname];
     if (known) {
@@ -92,7 +129,15 @@ function applyRouteMeta(pathname) {
             setMetaDescription(DEFAULT_DESCRIPTION);
         }
     }
-    setCanonical(window.location.origin + pathname);
+    // Canonical must always point at the www origin, never the apex domain
+    // (the apex 308-redirects, which Google reports as "Page with redirect").
+    setCanonical(CANONICAL_ORIGIN + pathname);
+    const policy = robotsPolicy(pathname);
+    if (policy === 'index') {
+        setRobots('index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    } else if (policy === 'noindex') {
+        setRobots('noindex, follow');
+    }
 }
 
 function RouteTracker() {

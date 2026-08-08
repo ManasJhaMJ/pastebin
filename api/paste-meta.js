@@ -37,6 +37,11 @@ export default async function handler(req, res) {
     let title = slug;
     let lang = '';
     let description = 'View this paste on BinPaste - the better pastebin alternative.';
+    // Only pastes explicitly marked "Make Public" are allowed into search
+    // results. Unlisted pastes, missing pastes, expired pastes, and lookup
+    // failures all stay noindex so private content can never leak into Google.
+    let indexable = false;
+    let expiresAt = null;
     try {
         const dbUrl = process.env.DATABASE_URL;
         if (dbUrl && slug) {
@@ -46,13 +51,33 @@ export default async function handler(req, res) {
                 lang = (data.language || '').toString();
                 const snippet = (data.text || '').toString().replace(/\s+/g, ' ').trim().slice(0, 160);
                 if (snippet) description = snippet;
+                expiresAt = data.expiresAt || null;
+                // Don't invite Google to index a paste that will 404 shortly.
+                // Require at least 7 days of remaining life.
+                const longLived = !expiresAt || expiresAt - Date.now() > 7 * 24 * 60 * 60 * 1000;
+                indexable = data.isPublic === true && longLived;
             }
         }
     } catch {
-        // Ignore lookup failures; fall back to generic preview text.
+        // Ignore lookup failures; fall back to generic preview text (and noindex).
     }
 
-    const pageTitle = `${title} | Paste on BinPaste`;
+    // Include the language in the title so indexed pastes have distinct,
+    // descriptive titles rather than near-identical ones.
+    const LANG_LABELS = {
+        plaintext: 'Text',
+        javascript: 'JavaScript',
+        python: 'Python',
+        java: 'Java',
+        css: 'CSS',
+        html: 'HTML',
+        cpp: 'C++',
+        c: 'C',
+    };
+    const langLabel = LANG_LABELS[lang] || '';
+    const pageTitle = langLabel
+        ? `${title} - ${langLabel} snippet | BinPaste`
+        : `${title} | Paste on BinPaste`;
     const pageUrl = `${SITE}/${encodeURIComponent(slug)}`;
     const imageUrl = `${SITE}/api/og?title=${encodeURIComponent(title)}&lang=${encodeURIComponent(lang)}`;
 
@@ -70,7 +95,23 @@ export default async function handler(req, res) {
         .replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${t}$2`)
         .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${d}$2`)
         .replace(/(<meta name="twitter:image" content=")[^"]*(")/, `$1${escapeHtml(imageUrl)}$2`)
-        .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${escapeHtml(pageUrl)}$2`);
+        .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${escapeHtml(pageUrl)}$2`)
+        // Public, long-lived pastes are indexable. Everything else (unlisted,
+        // expiring soon, missing, or a failed lookup) stays out of the index so
+        // private snippets can't leak and expired pastes can't become soft-404s.
+        // Link previews (OG/Twitter) are unaffected by the robots meta either way.
+        .replace(
+            /(<meta name="robots" content=")[^"]*(")/,
+            indexable
+                ? '$1index, follow, max-image-preview:large, max-snippet:-1$2'
+                : '$1noindex, follow$2'
+        )
+        .replace(
+            /(<meta name="googlebot" content=")[^"]*(")/,
+            indexable
+                ? '$1index, follow, max-image-preview:large, max-snippet:-1$2'
+                : '$1noindex, follow$2'
+        );
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400');
