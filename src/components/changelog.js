@@ -2,6 +2,14 @@
 // Keep entries short and user-facing; add a new one at the top when you ship.
 export const UPDATES = [
     {
+        date: 'Sep 16, 2026',
+        text: 'Published 11 new guides - 15 in all, now grouped by topic - on Stack Overflow, Discord, SQL, JSON, config files, and what never to paste.',
+    },
+    {
+        date: 'Sep 16, 2026',
+        text: 'Clearer content rules: added a plain-English disclaimer to the Terms, Privacy, and About pages.',
+    },
+    {
         date: 'Jul 27, 2026',
         text: 'Added a live counter of total views on a paste , plus a QR code and creation time on every paste.',
     },
