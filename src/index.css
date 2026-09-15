@@ -419,21 +419,16 @@ footer {
 }
 
 .removal-note {
+  max-width: 720px;
+  margin: 0.5rem auto;
   font-size: 0.8rem;
   color: #b8b8b8;
+  line-height: 1.5;
 }
 
 .removal-note a {
   color: #9ecbff;
   text-decoration: underline;
-}
-
-.disclaimer-note {
-  max-width: 720px;
-  margin: 0.5rem auto;
-  font-size: 0.72rem;
-  color: #a8a8a8;
-  line-height: 1.5;
 }
 
 #findPaste {
@@ -1125,5 +1120,315 @@ footer {
 
   .public {
     padding: 1rem;
+  }
+}
+/* ---------------------------------------------------------------------------
+   Long-form article + policy page styles (guides, about, privacy, contact).
+   Lists are matched with :not([class]) so these rules never fight the
+   purpose-built .guide-index / .updates-list / .faq-list styles above.
+   --------------------------------------------------------------------------- */
+
+.content-section h3 {
+  margin: 1.75rem 0 0.5rem;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+/* Byline / "last updated" line under an h1. */
+.page-meta,
+.guide-byline {
+  margin: 0.25rem 0 1.5rem;
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.guide-index-meta {
+  margin: 0.35rem 0 0;
+  color: #888;
+  font-size: 0.8rem;
+}
+
+/* Body lists in articles and policy pages. */
+.content-section ul:not([class]),
+.content-section ol:not([class]),
+.guide-list {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+  list-style-position: outside;
+}
+
+.content-section ul:not([class]) {
+  list-style: disc;
+}
+
+.content-section ol:not([class]),
+ol.guide-list {
+  list-style: decimal;
+}
+
+ul.guide-list {
+  list-style: disc;
+}
+
+.content-section ul:not([class]) li,
+.content-section ol:not([class]) li,
+.guide-list li {
+  margin-bottom: 0.6rem;
+  line-height: 1.7;
+}
+
+.content-section strong {
+  color: #fff;
+}
+
+/* Inline code in prose. */
+.content-section code {
+  background: #232323;
+  border: 1px solid #3a3a3a;
+  border-radius: 4px;
+  padding: 0.1rem 0.35rem;
+  font-family: 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 0.9em;
+  color: #e6e6e6;
+  word-break: break-word;
+}
+
+/* Preformatted code block inside a guide. */
+.guide-code {
+  background: #232323;
+  border: 1px solid #3a3a3a;
+  border-left: 3px solid #14b938;
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  margin: 1.25rem 0;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+.guide-code code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.85rem;
+  white-space: pre;
+  word-break: normal;
+  color: #d8d8d8;
+}
+
+/* Callout for a warning or aside inside a guide. */
+.guide-note {
+  background: #2f2b22;
+  border: 1px solid #5c4a2a;
+  border-left: 3px solid #e0a800;
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin: 1.25rem 0;
+  color: #f0e4c8;
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+/* Shared illustration at the top of every guide. */
+.guide-hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 1.5rem 0 2rem;
+  border-radius: 12px;
+  border: 1px solid #3a3a3a;
+}
+
+/* Language label sitting above a code block. */
+.guide-code-wrap {
+  position: relative;
+  margin: 1.25rem 0;
+}
+
+.guide-code-wrap .guide-code {
+  margin: 0;
+}
+
+.guide-code-lang {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.7rem;
+  font-family: 'Ubuntu Mono', 'Consolas', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a7a7a;
+  pointer-events: none;
+}
+
+/* Comparison tables in guides. The wrapper scrolls so a wide table never
+   widens the page on a phone. */
+.guide-table-wrap {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+}
+
+.guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  min-width: 460px;
+}
+
+.guide-table caption {
+  caption-side: bottom;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.82rem;
+  color: #9a9a9a;
+  text-align: left;
+}
+
+.guide-table th,
+.guide-table td {
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #333;
+  line-height: 1.55;
+}
+
+.guide-table thead th {
+  background: #2f2f2f;
+  color: #fff;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.guide-table tbody th {
+  color: #fff;
+  font-weight: 500;
+  background: #282828;
+}
+
+.guide-table tbody tr:last-child th,
+.guide-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.guide-table td {
+  color: #cfcfcf;
+}
+
+/* Inline call to action inside a guide. */
+.guide-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: #232f25;
+  border: 1px solid #14b938;
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  margin: 1.75rem 0;
+}
+
+.guide-cta p {
+  margin: 0;
+  flex: 1 1 240px;
+  color: #dfeede;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.guide-cta-btn {
+  flex-shrink: 0;
+  background: #14b938;
+  color: #10250f;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.content-section a.guide-cta-btn {
+  color: #10250f;
+  text-decoration: none;
+}
+
+.content-section a.guide-cta-btn:hover {
+  background: #17d442;
+}
+
+/* Contact page reason cards. */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin: 1.75rem 0;
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  background: #2f2f2f;
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.contact-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.contact-card p {
+  margin: 0;
+  flex: 1;
+  font-size: 0.88rem;
+  color: #bdbdbd;
+  line-height: 1.6;
+}
+
+.contact-action {
+  color: #14b938;
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.content-section a.contact-action {
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .content-section h1 {
+    font-size: 1.6rem;
+  }
+
+  .guide-code {
+    padding: 0.85rem;
+  }
+
+  .guide-code code {
+    font-size: 0.78rem;
+  }
+
+  .guide-table {
+    font-size: 0.85rem;
+  }
+
+  .guide-table th,
+  .guide-table td {
+    padding: 0.55rem 0.7rem;
+  }
+
+  .guide-cta {
+    padding: 1rem;
+  }
+
+  .guide-cta-btn {
+    width: 100%;
+    text-align: center;
   }
 }

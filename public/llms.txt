@@ -25,7 +25,38 @@ Home page: https://www.binpaste.xyz/
 - [Public pastes](https://www.binpaste.xyz/public): Browse public pastes shared by the community, sorted newest first.
 - [Find a paste](https://www.binpaste.xyz/find): Look up an existing paste by its name or slug.
 - [Pastebin alternative](https://www.binpaste.xyz/pastebin-alternative): How BinPaste compares to Pastebin.com and why it's a better alternative.
-- [Guides](https://www.binpaste.xyz/guides): How-to guides for sharing code online, sharing terminal logs, and choosing a pastebin alternative.
+- [Guides](https://www.binpaste.xyz/guides): 15 in-depth how-to guides written by the developer, grouped by topic.
+  - Start here:
+    - [How to share code online](https://www.binpaste.xyz/guides/how-to-share-code-online)
+    - [How to copy and paste text between devices](https://www.binpaste.xyz/guides/copy-paste-text-between-devices)
+  - Sharing in a specific place:
+    - [Where to paste code for a Stack Overflow or Reddit question](https://www.binpaste.xyz/guides/paste-code-for-stack-overflow-reddit)
+    - [Sharing code on Discord: what breaks and what to do instead](https://www.binpaste.xyz/guides/share-code-on-discord)
+    - [How to share code in a job application or take-home test](https://www.binpaste.xyz/guides/share-code-job-application)
+  - Sharing a specific kind of file:
+    - [How to share terminal logs and error messages](https://www.binpaste.xyz/guides/how-to-share-terminal-logs)
+    - [How to share a config file safely (and what to redact first)](https://www.binpaste.xyz/guides/share-config-file-safely)
+    - [How to share a long SQL query or database schema](https://www.binpaste.xyz/guides/share-sql-query-schema)
+    - [How to share JSON so it stays readable](https://www.binpaste.xyz/guides/share-json-readable)
+  - Safety and privacy:
+    - [8 things you should never paste into a pastebin](https://www.binpaste.xyz/guides/things-never-to-paste)
+    - [Are pastebins safe? What "unlisted" actually means](https://www.binpaste.xyz/guides/are-pastebins-safe)
+  - Choosing a tool:
+    - [The best free pastebin alternative in 2026](https://www.binpaste.xyz/guides/best-pastebin-alternative)
+    - [BinPaste vs Pastebin: a straight comparison](https://www.binpaste.xyz/guides/binpaste-vs-pastebin)
+    - [BinPaste vs GitHub Gist: which should you use?](https://www.binpaste.xyz/guides/binpaste-vs-github-gist)
+    - [How to self-host a pastebin (and when it's worth it)](https://www.binpaste.xyz/guides/self-host-pastebin)
+- [About](https://www.binpaste.xyz/about): Who builds BinPaste, why it exists, what it deliberately does not do, and how it is funded.
+- [Contact](https://www.binpaste.xyz/contact): How to report or remove a paste, report a bug, or ask a privacy question.
+- [Privacy Policy](https://www.binpaste.xyz/privacy): What is stored, how long for, analytics, advertising cookies, and deletion requests.
+- [Terms of Service](https://www.binpaste.xyz/terms): Acceptable use, content responsibility, and content removal.
+
+## Indexing
+
+Only the pages listed above are intended for search indexing. Individual paste
+pages (https://www.binpaste.xyz/<slug>), their raw views, and the /public feed
+are served with a "noindex, follow" robots meta tag, because their content is
+text submitted by users rather than content written for this site.
 
 ## How it works
 

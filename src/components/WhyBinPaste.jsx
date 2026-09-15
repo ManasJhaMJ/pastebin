@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { GUIDES } from '../pages/guidesData';
 import { UPDATES } from './changelog';
 
+// How many guide cards to show on the homepage before linking to /guides.
+const HOMEPAGE_GUIDES = 6;
+
 const FEATURES = [
     ['Custom links', 'Pick your own name so your paste lives at a clean URL like www.binpaste.xyz/my-notes - or generate a random one.'],
     ['Syntax highlighting', 'Code is highlighted with line numbers for Plain Text, JavaScript, Python, Java, C, C++, HTML, and CSS.'],
@@ -58,9 +61,11 @@ function WhyBinPaste() {
                 ))}
             </div>
 
-            <h2 id="blogs">Helpful blogs</h2>
+            <h2 id="blogs">Helpful guides</h2>
+            {/* A sample only. The full list, grouped by topic, is on /guides -
+                the homepage should not turn into an index page. */}
             <div className="blog-grid">
-                {GUIDES.map((g) => (
+                {GUIDES.slice(0, HOMEPAGE_GUIDES).map((g) => (
                     <Link className="blog-card" to={`/guides/${g.slug}`} key={g.slug}>
                         <h3>{g.title}</h3>
                         <p>{g.description}</p>
@@ -68,6 +73,9 @@ function WhyBinPaste() {
                     </Link>
                 ))}
             </div>
+            <p>
+                <Link to="/guides">Browse all {GUIDES.length} guides →</Link>
+            </p>
             <h2 id="updates">Dev updates</h2>
             <ul className="updates-list">
                 {UPDATES.map((u, i) => (

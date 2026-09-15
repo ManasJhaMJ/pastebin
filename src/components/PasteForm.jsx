@@ -24,6 +24,24 @@ const SLUG_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 // Maximum paste size (characters). Keeps documents small and Firebase happy.
 const MAX_CHARS = 400000;
 
+// Names that are already site routes. A paste using one of these would be
+// created successfully but never viewable, because the route wins. Must stay in
+// sync with the rewrites in vercel.json and the routes in App.jsx.
+const RESERVED_SLUGS = new Set([
+    'api',
+    'find',
+    'public',
+    'guides',
+    'pastebin-alternative',
+    'terms',
+    'privacy',
+    'about',
+    'contact',
+    'sitemap',
+    'robots',
+    'raw',
+]);
+
 function randomSlug() {
     // 8-10 characters.
     const length = 8 + Math.floor(Math.random() * 3);
@@ -92,6 +110,11 @@ function PasteForm() {
 
         if (text.length > MAX_CHARS) {
             setError(`Paste is too large (${text.length.toLocaleString()} / ${MAX_CHARS.toLocaleString()} characters). Please shorten it.`);
+            return;
+        }
+
+        if (RESERVED_SLUGS.has(slug.toLowerCase())) {
+            setError(`"${slug}" is a reserved page name on this site. Please choose another one.`);
             return;
         }
 

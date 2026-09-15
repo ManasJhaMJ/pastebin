@@ -36,12 +36,27 @@ const ROUTE_META = {
     '/guides': {
         title: 'Guides | How to Share Code & Text Online | BinPaste',
         description:
-            'BinPaste guides: how to share code online, share terminal logs, and pick the best free pastebin alternative.',
+            'Fifteen guides on sharing code and text online: Stack Overflow and Discord, logs, SQL, JSON and config files, what never to paste, and how BinPaste compares to Gist and Pastebin.',
     },
     '/terms': {
         title: 'Terms of Service | BinPaste',
         description:
             'BinPaste Terms of Service: acceptable use, content responsibility, content removal, and limitation of liability.',
+    },
+    '/privacy': {
+        title: 'Privacy Policy | BinPaste',
+        description:
+            'What BinPaste collects and why: paste storage and retention, analytics, advertising cookies, server logs, and how to request deletion of a paste.',
+    },
+    '/about': {
+        title: 'About BinPaste | Who Builds It and Why',
+        description:
+            'BinPaste is an independent project by developer Manas Jha - a free, no-account way to share code and text. What it does, what it deliberately does not, and how it is funded.',
+    },
+    '/contact': {
+        title: 'Contact | BinPaste',
+        description:
+            'Get in touch with the developer of BinPaste - report or remove a paste, report a bug, request a feature, or ask a privacy question.',
     },
 };
 
@@ -85,28 +100,27 @@ function setRobots(content) {
     tag.setAttribute('content', content);
 }
 
-// Static routes that are always safe to index.
+// The only routes we ask search engines to index: the homepage and our own
+// editorial / policy pages. Everything else - user-generated paste pages, the
+// public feed that lists them, raw views, and the /find lookup form - is
+// noindex. User-pasted text is not our content and carries no value for a
+// search result, so it is deliberately kept out of the index entirely.
+// Must stay in sync with api/sitemap.js and api/page-meta.js.
 const INDEXABLE_PATHS = new Set([
     '/',
-    '/public',
     '/pastebin-alternative',
     '/guides',
+    '/about',
+    '/contact',
+    '/privacy',
     '/terms',
 ]);
 
-// Paste pages (/:slug) are a special case: whether they may be indexed depends
-// on the paste's isPublic flag, which only the server knows when it renders the
-// shell (see api/paste-meta.js). So we must NOT touch the robots tag on those
-// routes - overwriting it here would clobber the server's decision. Raw views
-// and /find are never indexable.
 function robotsPolicy(pathname) {
     if (INDEXABLE_PATHS.has(pathname) || pathname.startsWith('/guides/')) {
         return 'index';
     }
-    if (pathname === '/find' || pathname.endsWith('/raw')) {
-        return 'noindex';
-    }
-    return 'leave-as-is'; // /:slug - decided server-side
+    return 'noindex';
 }
 
 function applyRouteMeta(pathname) {

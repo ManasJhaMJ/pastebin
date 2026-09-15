@@ -6,6 +6,7 @@ function Terms() {
     return (
         <article className="content-section">
             <h1>Terms of Service</h1>
+            <p className="page-meta">Last updated: 15 September 2026</p>
             <p className="lead">
                 Please read these terms carefully before using BinPaste. By creating, viewing, or
                 sharing a paste, you agree to these terms.
@@ -56,13 +57,31 @@ function Terms() {
                 BinPaste as your only copy of any content.
             </p>
 
-            <h2>6. Limitation of liability</h2>
+            <h2>6. User-generated content and disclaimer</h2>
             <p>
-                Pastes are created and shared by users. The developer of this website is not
-                responsible for any content posted, shared, or linked by users, or for any misuse,
-                loss, or damage arising from the use of this service. To the fullest extent permitted
-                by law, the developer shall not be liable for any direct, indirect, incidental, or
-                consequential damages arising from your use of, or inability to use, BinPaste.
+                BinPaste hosts user-generated content. Pastes are created and shared by users, and
+                they are not reviewed, verified, moderated, or endorsed before they become
+                accessible. A paste may also contain links to external websites over which we have no
+                control. The presence of any paste on this site does not imply that we agree with it,
+                have checked it, or vouch for its accuracy, legality, or safety.
+            </p>
+            <p>
+                The developer of this website is not responsible for any content posted, shared, or
+                linked by users, or for any misuse, loss, or damage arising from the use of this
+                service. Content is provided &quot;as is&quot; without warranty of any kind.
+            </p>
+            <p>
+                To the fullest extent permitted by law, the developer shall not be liable for any
+                direct, indirect, incidental, special, or consequential damages arising from your use
+                of, or inability to use, BinPaste - including any damages resulting from content
+                posted by other users, from the loss or deletion of a paste, or from a paste being
+                accessed by someone you did not intend to share it with.
+            </p>
+            <p>
+                If you find a paste that breaches these terms, report it using the Report button on
+                that paste or email us the link (see section 4). See also our{' '}
+                <Link to="/privacy">Privacy Policy</Link> for what is stored and how to request
+                deletion.
             </p>
 
             <h2>7. Changes to these terms</h2>
@@ -72,7 +91,9 @@ function Terms() {
             </p>
 
             <p className="content-links">
-                <Link to="/">Back to BinPaste</Link> · <Link to="/guides">Guides</Link>
+                <Link to="/">Back to BinPaste</Link> · <Link to="/privacy">Privacy Policy</Link> ·{' '}
+                <Link to="/about">About</Link> · <Link to="/contact">Contact</Link> ·{' '}
+                <Link to="/guides">Guides</Link>
             </p>
         </article>
     );

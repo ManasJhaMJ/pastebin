@@ -4,9 +4,17 @@
 User-agent: *
 Allow: /
 
-# /find is a lookup form with nothing to index. It is served with a
-# "noindex, follow" robots meta tag instead of being blocked here - a
-# Disallow rule would stop crawlers from ever reading that tag.
+# Indexing policy
+# ---------------
+# Only pages we wrote are meant to be indexed: the homepage, /guides and each
+# guide, /pastebin-alternative, /about, /contact, /privacy, /terms. Those are
+# the URLs listed in the sitemap.
+#
+# User-generated paste pages (/<name> and /<name>/raw), the /public feed that
+# lists them, and the /find lookup form are all served with a "noindex, follow"
+# robots meta tag. They are intentionally NOT blocked with Disallow here: a
+# Disallow rule would stop crawlers reading the noindex tag, which is the thing
+# that actually keeps them out of search results.
 
 # Search engines
 User-agent: Googlebot

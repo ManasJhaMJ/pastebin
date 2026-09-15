@@ -23,13 +23,18 @@ const ROUTE_META = {
         title: 'Find a Paste | BinPaste',
         description:
             'Find a paste on BinPaste by entering its name or slug. Open shared code snippets and text instantly.',
-        // /find is disallowed in robots.txt; keep it out of the index too.
+        // A lookup form with no content of its own.
         noindex: true,
     },
     'public': {
         title: 'Public Pastes | BinPaste',
         description:
             'Browse public pastes on BinPaste. Discover code snippets, text, and shared notes from the community, sorted by newest first.',
+        // This page is nothing but a list of user-pasted text. It has no value
+        // as a search result and the pastes it links to are noindex too, so
+        // keep the feed itself out of the index. Kept crawlable (follow) so the
+        // footer links to our own pages are still discovered from here.
+        noindex: true,
     },
     'pastebin-alternative': {
         title: 'Pastebin Alternative | Why BinPaste is Better | BinPaste',
@@ -39,32 +44,102 @@ const ROUTE_META = {
     'guides': {
         title: 'Guides | How to Share Code & Text Online | BinPaste',
         description:
-            'BinPaste guides: how to share code online, share terminal logs, and pick the best free pastebin alternative.',
+            'Fifteen guides on sharing code and text online: Stack Overflow and Discord, logs, SQL, JSON and config files, what never to paste, and how BinPaste compares to Gist and Pastebin.',
     },
     'terms': {
         title: 'Terms of Service | BinPaste',
         description:
             'BinPaste Terms of Service: acceptable use, content responsibility, content removal, and limitation of liability.',
     },
+    'privacy': {
+        title: 'Privacy Policy | BinPaste',
+        description:
+            'What BinPaste collects and why: paste storage and retention, analytics, advertising cookies, server logs, and how to request deletion of a paste.',
+    },
+    'about': {
+        title: 'About BinPaste | Who Builds It and Why',
+        description:
+            'BinPaste is an independent project by developer Manas Jha - a free, no-account way to share code and text. What it does, what it deliberately does not, and how it is funded.',
+    },
+    'contact': {
+        title: 'Contact | BinPaste',
+        description:
+            'Get in touch with the developer of BinPaste - report or remove a paste, report a bug, request a feature, or ask a privacy question.',
+    },
     'guides/how-to-share-code-online': {
         title: 'How to Share Code Online (The Easy Way) | BinPaste',
         description:
-            'A simple, free way to share code snippets online with a shareable link and syntax highlighting - no account required.',
+            'A practical guide to sharing code snippets online with a shareable link and syntax highlighting - what to include, how to name it, and the mistakes that waste everyone time.',
     },
     'guides/how-to-share-terminal-logs': {
         title: 'How to Share Terminal Logs and Error Messages | BinPaste',
         description:
-            'Share terminal output, stack traces, and error logs with a clean link instead of pasting walls of text into chat.',
+            'How to share stack traces, terminal output, and error logs so people can actually help you - what to include, what to strip out, and how to link it instead of flooding the chat.',
     },
     'guides/copy-paste-text-between-devices': {
         title: 'How to Copy and Paste Text Between Devices | BinPaste',
         description:
-            'Copy and paste text or code between your phone, laptop, and any other device using a link - no app, no cable, and no account.',
+            'Copy and paste text or code between your phone, laptop, and any other device using a link - no app, no cable, and no account. Plus when a shared clipboard is the wrong choice.',
     },
     'guides/best-pastebin-alternative': {
         title: 'The Best Free Pastebin Alternative in 2026 | BinPaste',
         description:
-            'What to look for in a pastebin alternative - custom links, syntax highlighting, expiring pastes, raw view, and no sign-up.',
+            'How to judge a pastebin alternative - the features that matter, the ones that do not, and when a Gist, a secret sharer, or self-hosting is the better answer.',
+    },
+    'guides/paste-code-for-stack-overflow-reddit': {
+        title: 'Where to Paste Code for a Stack Overflow or Reddit Question | BinPaste',
+        description:
+            'What belongs inside the question and what belongs behind a link when you post code to Stack Overflow or Reddit - and the four ways Reddit quietly mangles code.',
+    },
+    'guides/share-code-on-discord': {
+        title: 'Sharing Code on Discord: What Breaks and What to Do Instead | BinPaste',
+        description:
+            'Code blocks, the 2,000 character limit, expiring attachment links, and help-channel etiquette - what actually breaks when you share code on Discord, and the fix for each.',
+    },
+    'guides/share-code-job-application': {
+        title: 'How to Share Code in a Job Application or Take-Home Test | BinPaste',
+        description:
+            'Repo or paste link, how to present a single file so a reviewer actually reads it, and why publishing a take-home on a public GitHub profile can breach the brief.',
+    },
+    'guides/share-config-file-safely': {
+        title: 'How to Share a Config File Safely (and What to Redact First) | BinPaste',
+        description:
+            'A redaction process for .env files, docker-compose, and nginx configs: what to strip, what to keep, what everyone forgets, and what to do if a secret has already gone out.',
+    },
+    'guides/share-sql-query-schema': {
+        title: 'How to Share a Long SQL Query or Database Schema | BinPaste',
+        description:
+            'How to format a wide query, cut a schema down to the tables that matter, and share both without a chat client silently replacing your quote marks.',
+    },
+    'guides/share-json-readable': {
+        title: 'How to Share JSON So It Stays Readable | BinPaste',
+        description:
+            'Pretty-print, trim, and redact JSON so it stays valid and readable - the one-liners for jq, Python, Node, and PowerShell, plus the six things that corrupt it in transit.',
+    },
+    'guides/things-never-to-paste': {
+        title: '8 Things You Should Never Paste Into a Pastebin | BinPaste',
+        description:
+            'Credentials, private keys, customer data, live session tokens, and five more things that should never reach a paste link - with what to use for each instead.',
+    },
+    'guides/are-pastebins-safe': {
+        title: 'Are Pastebins Safe? What "Unlisted" Actually Means | BinPaste',
+        description:
+            'What unlisted really protects against, the ways a paste link leaks, whether your URL can be guessed, and why you should never paste a copied command straight into a terminal.',
+    },
+    'guides/binpaste-vs-pastebin': {
+        title: 'BinPaste vs Pastebin: A Straight Comparison | BinPaste',
+        description:
+            'Named links, ads on paste pages, accounts, APIs, and language coverage - where each one wins, where neither fits, and which to pick for a given job.',
+    },
+    'guides/binpaste-vs-github-gist': {
+        title: 'BinPaste vs GitHub Gist: Which Should You Use? | BinPaste',
+        description:
+            'A Gist is a small Git repository; a paste is a message with a URL. A feature-by-feature comparison, where Gist wins outright, and the revision-history trap to know about.',
+    },
+    'guides/self-host-pastebin': {
+        title: "How to Self-Host a Pastebin (and When It's Worth It) | BinPaste",
+        description:
+            'PrivateBin, Opengist, and wastebin compared, a twenty-minute Docker setup with TLS, the abuse problem nobody mentions, and an honest test for whether it is worth your time.',
     },
 };
 
@@ -116,10 +191,9 @@ export default async function handler(req, res) {
         .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${u}$2`);
 
     if (meta.noindex) {
-        html = html.replace(
-            /(<meta name="robots" content=")[^"]*(")/,
-            '$1noindex, follow$2'
-        );
+        html = html
+            .replace(/(<meta name="robots" content=")[^"]*(")/, '$1noindex, follow$2')
+            .replace(/(<meta name="googlebot" content=")[^"]*(")/, '$1noindex, follow$2');
     }
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');

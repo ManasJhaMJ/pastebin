@@ -13,7 +13,7 @@
             "destination": "/api/sitemap"
         },
         {
-            "source": "/(find|public|guides|pastebin-alternative|terms)",
+            "source": "/(find|public|guides|pastebin-alternative|terms|privacy|about|contact)",
             "destination": "/api/page-meta?path=$1"
         },
         {
@@ -21,7 +21,7 @@
             "destination": "/api/page-meta?path=guides/$1"
         },
         {
-            "source": "/((?!api/|find$|public$|guides$|pastebin-alternative$|terms$)[^/.]+)",
+            "source": "/((?!api/|find$|public$|guides$|pastebin-alternative$|terms$|privacy$|about$|contact$)[^/.]+)",
             "destination": "/api/paste-meta?slug=$1"
         },
         {

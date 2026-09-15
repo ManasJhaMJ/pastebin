@@ -37,11 +37,6 @@ export default async function handler(req, res) {
     let title = slug;
     let lang = '';
     let description = 'View this paste on BinPaste - the better pastebin alternative.';
-    // Only pastes explicitly marked "Make Public" are allowed into search
-    // results. Unlisted pastes, missing pastes, expired pastes, and lookup
-    // failures all stay noindex so private content can never leak into Google.
-    let indexable = false;
-    let expiresAt = null;
     try {
         const dbUrl = process.env.DATABASE_URL;
         if (dbUrl && slug) {
@@ -51,15 +46,10 @@ export default async function handler(req, res) {
                 lang = (data.language || '').toString();
                 const snippet = (data.text || '').toString().replace(/\s+/g, ' ').trim().slice(0, 160);
                 if (snippet) description = snippet;
-                expiresAt = data.expiresAt || null;
-                // Don't invite Google to index a paste that will 404 shortly.
-                // Require at least 7 days of remaining life.
-                const longLived = !expiresAt || expiresAt - Date.now() > 7 * 24 * 60 * 60 * 1000;
-                indexable = data.isPublic === true && longLived;
             }
         }
     } catch {
-        // Ignore lookup failures; fall back to generic preview text (and noindex).
+        // Ignore lookup failures; fall back to generic preview text.
     }
 
     // Include the language in the title so indexed pastes have distinct,
@@ -96,22 +86,24 @@ export default async function handler(req, res) {
         .replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${d}$2`)
         .replace(/(<meta name="twitter:image" content=")[^"]*(")/, `$1${escapeHtml(imageUrl)}$2`)
         .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${escapeHtml(pageUrl)}$2`)
-        // Public, long-lived pastes are indexable. Everything else (unlisted,
-        // expiring soon, missing, or a failed lookup) stays out of the index so
-        // private snippets can't leak and expired pastes can't become soft-404s.
-        // Link previews (OG/Twitter) are unaffected by the robots meta either way.
-        .replace(
-            /(<meta name="robots" content=")[^"]*(")/,
-            indexable
-                ? '$1index, follow, max-image-preview:large, max-snippet:-1$2'
-                : '$1noindex, follow$2'
-        )
-        .replace(
-            /(<meta name="googlebot" content=")[^"]*(")/,
-            indexable
-                ? '$1index, follow, max-image-preview:large, max-snippet:-1$2'
-                : '$1noindex, follow$2'
-        );
+        // Paste pages are never indexed, public or not. The content is text that
+        // users pasted, not content of ours: it has no value as a search result,
+        // it can be a copy of something published elsewhere, and pastes with an
+        // expiry turn into soft 404s. Keeping every paste out of the index means
+        // the only pages Google evaluates are ones we actually wrote.
+        // "follow" is retained so links out of a paste page are still crawled,
+        // and OG/Twitter link previews are unaffected by the robots meta.
+        .replace(/(<meta name="robots" content=")[^"]*(")/, '$1noindex, follow$2')
+        .replace(/(<meta name="googlebot" content=")[^"]*(")/, '$1noindex, follow$2');
+
+    // Don't load the ad script on paste pages. Auto ads would otherwise place
+    // ads next to arbitrary user-submitted text, which we have no control over -
+    // a policy risk, and a bad experience on the one page people came to read.
+    // Ads stay on our own pages (homepage, guides, etc.). Stated on /about.
+    html = html.replace(
+        /<script[^>]*pagead2\.googlesyndication\.com[\s\S]*?<\/script>/g,
+        ''
+    );
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate=86400');

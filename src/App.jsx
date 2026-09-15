@@ -17,6 +17,9 @@ const PastebinAlternative = lazy(() => import('./pages/PastebinAlternative'));
 const Guides = lazy(() => import('./pages/Guides'));
 const Guide = lazy(() => import('./pages/Guide'));
 const Terms = lazy(() => import('./pages/Terms'));
+const Privacy = lazy(() => import('./pages/Privacy'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
 
 function Home() {
   return (
@@ -44,6 +47,9 @@ function App() {
               <Route path="/guides" element={<Guides />} />
               <Route path="/guides/:guideSlug" element={<Guide />} />
               <Route path="/terms" element={<Terms />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
               <Route path="/:slug/raw" element={<RawPaste />} />
               <Route path="/:slug" element={<ViewPaste />} />
               <Route path="*" element={<ViewPaste />} />
