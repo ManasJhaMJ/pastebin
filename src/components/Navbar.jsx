@@ -2,7 +2,6 @@ import { FaPlus } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { FaGlobeAsia } from "react-icons/fa";
-import { FaBookOpen } from "react-icons/fa";
 
 
 function Navbar() {
@@ -28,12 +27,6 @@ function Navbar() {
                 <NavLink to="public"><button className="btn01">
                     <FaGlobeAsia size={13} />
                     Public
-                </button></NavLink>
-                {/* Guides are the site's editorial content - keep them reachable
-                    from the primary nav, not just the footer. */}
-                <NavLink to="guides"><button className="btn02">
-                    <FaBookOpen size={13} />
-                    Guides
                 </button></NavLink>
             </span>
         </nav>

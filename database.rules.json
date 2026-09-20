@@ -1,0 +1,88 @@
+{
+  /* Realtime Database security rules for BinPaste.
+     Paste this into Firebase Console -> Realtime Database -> Rules.
+
+     Rules only ever GRANT access, they never deny it, and a grant on a parent
+     cascades to all its children. So the default below is closed, and each
+     path opens exactly what the app needs. */
+  "rules": {
+    ".read": false,
+    ".write": false,
+
+    "pastes": {
+      /* Deliberately no ".read" at this level, so the collection cannot be
+         listed. Listing it would hand every visitor the full text of every
+         paste, including private ones. The /public page reads publicIndex
+         instead, and single pastes are still readable by slug below. */
+
+      "$slug": {
+        /* Anyone holding the link can read one paste. api/paste-meta.js also
+           fetches this over unauthenticated REST to build link previews, so it
+           has to stay open. */
+        ".read": true,
+
+        /* Create-only: a slug can be written once and never edited, which is
+           what the form promises. Also stops one paste overwriting another.
+           Deletion is blocked too; do removal requests from the console, which
+           bypasses these rules. */
+        ".write": "!data.exists()",
+
+        ".validate": "newData.hasChildren(['text', 'language', 'isPublic', 'createdAt'])",
+
+        /* Limit matches MAX_CHARS in PasteForm.jsx. */
+        "text": { ".validate": "newData.isString() && newData.val().length <= 400000" },
+        "language": { ".validate": "newData.isString() && newData.val().length <= 32" },
+        "isPublic": { ".validate": "newData.isBoolean()" },
+        "createdAt": { ".validate": "newData.isNumber()" },
+        /* Absent when the paste never expires; validation is skipped for nulls. */
+        "expiresAt": { ".validate": "newData.isNumber()" },
+
+        /* Views are counted on a paste that already exists, so they need their
+           own grant: the create-only rule above would reject them. Restricted
+           to a +1 step so the counter can't be set to an arbitrary number. */
+        "views": {
+          ".write": true,
+          ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() + 1 : 1)"
+        },
+
+        /* Reject unknown fields. Add the field here first if you extend a paste. */
+        "$other": { ".validate": false }
+      }
+    },
+
+    "publicIndex": {
+      /* Listing is the whole point of this node: slug + 150-char preview +
+         dates, never paste bodies. */
+      ".read": true,
+
+      /* Required, not optional. Without it the createdAt query is unindexed,
+         so Firebase downloads this entire node and sorts it in the browser,
+         which defeats the pagination in PublicPastes.jsx. */
+      ".indexOn": "createdAt",
+
+      "$slug": {
+        ".write": "!data.exists()",
+        ".validate": "newData.hasChildren(['preview', 'createdAt'])",
+
+        /* Limit matches PREVIEW_CHARS in PasteForm.jsx. Keeping this tight is
+           what guarantees the page stays small. */
+        "preview": { ".validate": "newData.isString() && newData.val().length <= 150" },
+        "language": { ".validate": "newData.isString() && newData.val().length <= 32" },
+        "createdAt": { ".validate": "newData.isNumber()" },
+        "expiresAt": { ".validate": "newData.isNumber()" },
+
+        "$other": { ".validate": false }
+      }
+    },
+
+    "stats": {
+      /* Lifetime counters shown by Stats.jsx. Read as a whole by getStats(). */
+      ".read": true,
+
+      "$counter": {
+        ".write": true,
+        ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() + 1 : 1)"
+      }
+    }
+  }
+}

@@ -1010,6 +1010,12 @@ footer {
   gap: 1.25rem;
 }
 
+/* Invisible marker below the grid. PublicPastes watches it with an
+   IntersectionObserver and loads the next page when it nears the viewport. */
+.paste-sentinel {
+  height: 1px;
+}
+
 .paste-card {
   background-color: #2f2f2f;
   border: 1px solid #3a3a3a;
