@@ -2,6 +2,10 @@
 // Keep entries short and user-facing; add a new one at the top when you ship.
 export const UPDATES = [
     {
+        date: 'Sep 21, 2026',
+        text: 'The public feed is much faster along with other performance improvements and bug fixes.',
+    },
+    {
         date: 'Sep 16, 2026',
         text: 'Published 11 new guides - 15 in all, now grouped by topic - on Stack Overflow, Discord, SQL, JSON, config files, and what never to paste.',
     },
