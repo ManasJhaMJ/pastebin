@@ -1,6 +1,6 @@
 // src/components/PasteForm.js
 import { useState, useRef, useEffect } from 'react';
-import { ref, get, update } from 'firebase/database';
+import { ref, set, get } from 'firebase/database';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
 import { incrementTotalPastes } from '../stats';
@@ -23,11 +23,6 @@ const SLUG_CHARS = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 // Maximum paste size (characters). Keeps documents small and Firebase happy.
 const MAX_CHARS = 400000;
-
-// Length of the snippet stored in `publicIndex/` for the /public cards. Keeping
-// it here means that page never has to download full paste bodies to preview
-// them. Must match PREVIEW_CHARS in PublicPastes.jsx.
-const PREVIEW_CHARS = 150;
 
 // Names that are already site routes. A paste using one of these would be
 // created successfully but never viewable, because the route wins. Must stay in
@@ -138,21 +133,8 @@ function PasteForm() {
             const createdAt = Date.now();
             const expiresAt = expiry === 'never' ? null : createdAt + Number(expiry);
 
-            // Save the paste, plus a small `publicIndex/` card when it is public
-            // so /public can list pastes without downloading their bodies. One
-            // multi-path update, so the paste and its card can't disagree.
-            const updates = {
-                [`pastes/${slug}`]: { text, language, isPublic, createdAt, expiresAt },
-            };
-            if (isPublic) {
-                updates[`publicIndex/${slug}`] = {
-                    preview: text.slice(0, PREVIEW_CHARS),
-                    language,
-                    createdAt,
-                    expiresAt,
-                };
-            }
-            await update(ref(db), updates);
+            // Save the paste with public visibility status and optional expiry.
+            await set(slugRef, { text, language, isPublic, createdAt, expiresAt });
 
             // Bump the lifetime paste counter (persists even if this paste is later deleted).
             incrementTotalPastes();

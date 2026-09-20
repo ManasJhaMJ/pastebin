@@ -10,17 +10,22 @@
     ".write": false,
 
     "pastes": {
-      /* Deliberately no ".read" at this level, so the collection cannot be
-         listed. Listing it would hand every visitor the full text of every
-         paste, including private ones. The /public page reads publicIndex
-         instead, and single pastes are still readable by slug below. */
+      /* Readable as a whole, because /public queries this node directly and a
+         query needs read access to the location it queries. Note the cost: this
+         also lets anyone download every paste, private ones included. Narrowing
+         it would mean listing public pastes from a separate index node.
+
+         Single pastes are read by slug from ViewPaste, RawPaste, the slug
+         availability check, and api/paste-meta.js over unauthenticated REST -
+         all covered by this grant, which cascades to the children. */
+      ".read": true,
+
+      /* Required, not optional. Without it the createdAt query in
+         PublicPastes.jsx is unindexed, so Firebase downloads this entire node
+         and sorts it in the browser, which defeats the pagination. */
+      ".indexOn": "createdAt",
 
       "$slug": {
-        /* Anyone holding the link can read one paste. api/paste-meta.js also
-           fetches this over unauthenticated REST to build link previews, so it
-           has to stay open. */
-        ".read": true,
-
         /* Create-only: a slug can be written once and never edited, which is
            what the form promises. Also stops one paste overwriting another.
            Deletion is blocked too; do removal requests from the console, which
@@ -46,31 +51,6 @@
         },
 
         /* Reject unknown fields. Add the field here first if you extend a paste. */
-        "$other": { ".validate": false }
-      }
-    },
-
-    "publicIndex": {
-      /* Listing is the whole point of this node: slug + 150-char preview +
-         dates, never paste bodies. */
-      ".read": true,
-
-      /* Required, not optional. Without it the createdAt query is unindexed,
-         so Firebase downloads this entire node and sorts it in the browser,
-         which defeats the pagination in PublicPastes.jsx. */
-      ".indexOn": "createdAt",
-
-      "$slug": {
-        ".write": "!data.exists()",
-        ".validate": "newData.hasChildren(['preview', 'createdAt'])",
-
-        /* Limit matches PREVIEW_CHARS in PasteForm.jsx. Keeping this tight is
-           what guarantees the page stays small. */
-        "preview": { ".validate": "newData.isString() && newData.val().length <= 150" },
-        "language": { ".validate": "newData.isString() && newData.val().length <= 32" },
-        "createdAt": { ".validate": "newData.isNumber()" },
-        "expiresAt": { ".validate": "newData.isNumber()" },
-
         "$other": { ".validate": false }
       }
     },

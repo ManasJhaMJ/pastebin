@@ -4,22 +4,18 @@ import { ref, query, orderByChild, limitToLast, endBefore, get } from 'firebase/
 import { db } from '../firebase';
 import { Link } from 'react-router-dom';
 
-// Reads `publicIndex/` (small cards: slug + 150-char preview + dates) rather
-// than `pastes/`, which holds the full text of every paste, public or not.
-// Written by PasteForm on create; see scripts/backfill-public-index.mjs.
-const INDEX_PATH = 'publicIndex';
-
-// Cards per request: the first paint and each scroll-triggered append.
+// Pastes fetched per request. Private ones are filtered out after they arrive,
+// so a request can yield fewer than this many cards - the scroll handler simply
+// fetches the next page until the screen is full.
 const PAGE_SIZE = 20;
 
-// Preview length used when the index entry was written. Only used to decide
-// whether the preview was truncated and needs a trailing ellipsis.
+// Characters of the body shown on a card.
 const PREVIEW_CHARS = 150;
 
 // Everything loaded this visit is kept in sessionStorage so returning from a
-// paste is instant instead of re-fetching. Bump the version if the cached
-// shape changes, so old shapes are ignored rather than rendered wrong.
-const CACHE_KEY = 'publicPastes:v1';
+// paste is instant instead of re-fetching. Bump the version if the cached shape
+// changes, so old shapes are ignored rather than rendered wrong.
+const CACHE_KEY = 'publicPastes:v2';
 const CACHE_TTL = 2 * 60 * 1000;
 const CACHE_MAX_ITEMS = 200;
 
@@ -50,23 +46,16 @@ function writeCache({ pastes, cursor, hasMore }) {
     }
 }
 
-// Expiry is also enforced when a paste is viewed; this just keeps dead cards
-// out of the grid in case the index still lists them.
-function unexpired(rows) {
-    const now = Date.now();
-    return rows.filter((row) => !row.expiresAt || row.expiresAt > now);
-}
-
-// Fetch one page of the index, newest first. `cursor` is the oldest entry
-// already on screen; passing it returns the page directly below that one.
+// Fetch one page of pastes, newest first, and reduce it to public cards.
+// `cursor` is the oldest paste already seen; passing it returns the page below.
 async function fetchPage(cursor) {
     const constraints = [orderByChild('createdAt')];
-    // The key disambiguates entries sharing a createdAt millisecond, which a
+    // The key disambiguates pastes sharing a createdAt millisecond, which a
     // value-only cursor would skip.
     if (cursor) constraints.push(endBefore(cursor.createdAt, cursor.slug));
     constraints.push(limitToLast(PAGE_SIZE));
 
-    const snapshot = await get(query(ref(db, INDEX_PATH), ...constraints));
+    const snapshot = await get(query(ref(db, 'pastes'), ...constraints));
 
     // forEach keeps the query's ordering; Object.entries would discard it.
     const rows = [];
@@ -75,13 +64,27 @@ async function fetchPage(cursor) {
     });
     rows.reverse(); // limitToLast returns ascending, we render newest first.
 
+    const now = Date.now();
+    const cards = rows
+        .filter((row) => row.isPublic)
+        .filter((row) => !row.expiresAt || row.expiresAt > now)
+        // Keep only what a card renders. Paste bodies run to 400k characters,
+        // which must not sit in state or go anywhere near sessionStorage.
+        .map((row) => ({
+            slug: row.slug,
+            preview: (row.text || '').slice(0, PREVIEW_CHARS),
+            truncated: (row.text || '').length > PREVIEW_CHARS,
+        }));
+
+    const oldest = rows.length ? rows[rows.length - 1] : null;
+
     return {
-        rows,
-        // Both of these are measured before the expiry filter: a page that is
-        // entirely expired must still advance the cursor and report more to
-        // come, or the feed would stall on it forever.
+        cards,
+        // Both of these are measured on the unfiltered rows. Most pastes are
+        // private, so a page yielding no cards must still advance the cursor
+        // and report more to come, or the feed would stall on it.
         hasMore: rows.length === PAGE_SIZE,
-        cursor: rows.length ? rows[rows.length - 1] : cursor,
+        cursor: oldest ? { slug: oldest.slug, createdAt: oldest.createdAt } : cursor,
     };
 }
 
@@ -112,7 +115,7 @@ function PublicPastes() {
             try {
                 const page = await fetchPage(null);
                 if (!active) return;
-                setPastes(unexpired(page.rows));
+                setPastes(page.cards);
                 setCursor(page.cursor);
                 setHasMore(page.hasMore);
             } catch {
@@ -132,7 +135,7 @@ function PublicPastes() {
             setPastes((current) => {
                 // Guard against a paste created mid-scroll shifting the window.
                 const seen = new Set(current.map((paste) => paste.slug));
-                return [...current, ...unexpired(page.rows).filter((paste) => !seen.has(paste.slug))];
+                return [...current, ...page.cards.filter((paste) => !seen.has(paste.slug))];
             });
             setCursor(page.cursor);
             setHasMore(page.hasMore);
@@ -147,6 +150,8 @@ function PublicPastes() {
 
     // Append the next page when the sentinel approaches the viewport. Not
     // observed while a request is in flight, so one scroll fetches one page.
+    // Also drives the initial fill: if a page held no public pastes, the
+    // sentinel is still on screen and the next page loads immediately.
     useEffect(() => {
         const sentinel = sentinelRef.current;
         if (!sentinel || loading || loadingMore || !hasMore) return;
@@ -166,13 +171,18 @@ function PublicPastes() {
         writeCache({ pastes, cursor, hasMore });
     }, [pastes, cursor, hasMore, loading]);
 
+    // While paging past private pastes there may be nothing to show yet, so the
+    // spinner has to stay up until the search is actually exhausted.
+    const searching = loading || (!pastes.length && hasMore && !error);
+
     return (
         <div className='public'>
             <h1>Public Pastes</h1>
-            {loading ? (
+            {searching ? (
                 <div className='loading'>
                     <span className='spinner' />
                     <p>Loading public pastes...</p>
+                    <span ref={sentinelRef} className='paste-sentinel' aria-hidden='true' />
                 </div>
             ) : pastes.length === 0 ? (
                 <p className='empty'>
@@ -184,10 +194,7 @@ function PublicPastes() {
                         {pastes.map((paste) => (
                             <div key={paste.slug} className="paste-card">
                                 <h3>{paste.slug}</h3>
-                                <p>
-                                    {paste.preview}
-                                    {paste.preview && paste.preview.length >= PREVIEW_CHARS ? '...' : ''}
-                                </p>
+                                <p>{paste.preview}{paste.truncated ? '...' : ''}</p>
                                 {/* A real <a href> (not navigate()) so crawlers can
                                     discover and follow public paste pages. */}
                                 <Link to={`/${paste.slug}`}>View</Link>
