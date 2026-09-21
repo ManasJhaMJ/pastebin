@@ -1,68 +1,21 @@
 {
   /* Realtime Database security rules for BinPaste.
-     Paste this into Firebase Console -> Realtime Database -> Rules.
 
-     Rules only ever GRANT access, they never deny it, and a grant on a parent
-     cascades to all its children. So the default below is closed, and each
-     path opens exactly what the app needs. */
+     Deliberately wide open for now - anyone can read or write anything. That
+     includes reading private pastes and overwriting or deleting existing ones.
+     Revisit when it matters; see git history for a locked-down version that
+     allows create-only writes, expiry-gated reads and increment-only counters.
+
+     ".indexOn" below is NOT a permission. It grants and denies nothing, so it
+     cannot break any feature. It only tells Firebase to index pastes by
+     createdAt, which is what keeps the paginated /public query from
+     downloading the whole node and sorting it in the browser. */
   "rules": {
-    ".read": false,
-    ".write": false,
+    ".read": true,
+    ".write": true,
 
     "pastes": {
-      /* Readable as a whole, because /public queries this node directly and a
-         query needs read access to the location it queries. Note the cost: this
-         also lets anyone download every paste, private ones included. Narrowing
-         it would mean listing public pastes from a separate index node.
-
-         Single pastes are read by slug from ViewPaste, RawPaste, the slug
-         availability check, and api/paste-meta.js over unauthenticated REST -
-         all covered by this grant, which cascades to the children. */
-      ".read": true,
-
-      /* Required, not optional. Without it the createdAt query in
-         PublicPastes.jsx is unindexed, so Firebase downloads this entire node
-         and sorts it in the browser, which defeats the pagination. */
-      ".indexOn": "createdAt",
-
-      "$slug": {
-        /* Create-only: a slug can be written once and never edited, which is
-           what the form promises. Also stops one paste overwriting another.
-           Deletion is blocked too; do removal requests from the console, which
-           bypasses these rules. */
-        ".write": "!data.exists()",
-
-        ".validate": "newData.hasChildren(['text', 'language', 'isPublic', 'createdAt'])",
-
-        /* Limit matches MAX_CHARS in PasteForm.jsx. */
-        "text": { ".validate": "newData.isString() && newData.val().length <= 400000" },
-        "language": { ".validate": "newData.isString() && newData.val().length <= 32" },
-        "isPublic": { ".validate": "newData.isBoolean()" },
-        "createdAt": { ".validate": "newData.isNumber()" },
-        /* Absent when the paste never expires; validation is skipped for nulls. */
-        "expiresAt": { ".validate": "newData.isNumber()" },
-
-        /* Views are counted on a paste that already exists, so they need their
-           own grant: the create-only rule above would reject them. Restricted
-           to a +1 step so the counter can't be set to an arbitrary number. */
-        "views": {
-          ".write": true,
-          ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() + 1 : 1)"
-        },
-
-        /* Reject unknown fields. Add the field here first if you extend a paste. */
-        "$other": { ".validate": false }
-      }
-    },
-
-    "stats": {
-      /* Lifetime counters shown by Stats.jsx. Read as a whole by getStats(). */
-      ".read": true,
-
-      "$counter": {
-        ".write": true,
-        ".validate": "newData.isNumber() && newData.val() === (data.exists() ? data.val() + 1 : 1)"
-      }
+      ".indexOn": "createdAt"
     }
   }
 }

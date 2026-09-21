@@ -9,13 +9,18 @@ import { Link } from 'react-router-dom';
 // fetches the next page until the screen is full.
 const PAGE_SIZE = 20;
 
+// Whole pages are routinely private, and a load that appends nothing looks
+// broken. So one load walks pages until it has something to show. Capped
+// because every page downloads full paste bodies, several hundred KB of them.
+const MAX_PAGES_PER_LOAD = 4;
+
 // Characters of the body shown on a card.
 const PREVIEW_CHARS = 150;
 
 // Everything loaded this visit is kept in sessionStorage so returning from a
 // paste is instant instead of re-fetching. Bump the version if the cached shape
 // changes, so old shapes are ignored rather than rendered wrong.
-const CACHE_KEY = 'publicPastes:v2';
+const CACHE_KEY = 'publicPastes:v3';
 const CACHE_TTL = 2 * 60 * 1000;
 const CACHE_MAX_ITEMS = 200;
 
@@ -53,7 +58,10 @@ async function fetchPage(cursor) {
     // The key disambiguates pastes sharing a createdAt millisecond, which a
     // value-only cursor would skip.
     if (cursor) constraints.push(endBefore(cursor.createdAt, cursor.slug));
-    constraints.push(limitToLast(PAGE_SIZE));
+    // The row endBefore excludes still counts against limitToLast - the server
+    // applies the bound inclusively and the SDK drops it afterwards - so a
+    // cursored page has to ask for one extra to come back PAGE_SIZE long.
+    constraints.push(limitToLast(cursor ? PAGE_SIZE + 1 : PAGE_SIZE));
 
     const snapshot = await get(query(ref(db, 'pastes'), ...constraints));
 
@@ -83,9 +91,37 @@ async function fetchPage(cursor) {
         // Both of these are measured on the unfiltered rows. Most pastes are
         // private, so a page yielding no cards must still advance the cursor
         // and report more to come, or the feed would stall on it.
-        hasMore: rows.length === PAGE_SIZE,
-        cursor: oldest ? { slug: oldest.slug, createdAt: oldest.createdAt } : cursor,
+        //
+        // Deliberately not `rows.length === PAGE_SIZE`: a short page is not a
+        // last page. Pastes get created and deleted between requests, and the
+        // count is one off whenever a bound is in play. Only an empty page
+        // proves the walk is done, at the cost of one final empty request.
+        hasMore: rows.length > 0,
+        // Nearly half the pastes predate the createdAt field. They sort ahead
+        // of every numeric value, so the walk reaches them last, and `null` is
+        // the cursor that pages through them - `undefined` makes endBefore
+        // throw, which used to end the feed permanently right at this boundary.
+        cursor: oldest ? { slug: oldest.slug, createdAt: oldest.createdAt ?? null } : cursor,
     };
+}
+
+// One load's worth of cards: pages until it has something to append, the data
+// runs out, or the cap is hit. Returning zero cards with hasMore still true is
+// fine and means "cap hit, try again" - the sentinel triggers the next load.
+async function fetchCards(startCursor) {
+    let cursor = startCursor;
+    let hasMore = true;
+    let cards = [];
+
+    for (let page = 0; page < MAX_PAGES_PER_LOAD; page++) {
+        const result = await fetchPage(cursor);
+        cards = cards.concat(result.cards);
+        cursor = result.cursor;
+        hasMore = result.hasMore;
+        if (!hasMore || cards.length) break;
+    }
+
+    return { cards, cursor, hasMore };
 }
 
 function PublicPastes() {
@@ -113,7 +149,7 @@ function PublicPastes() {
         let active = true;
         (async () => {
             try {
-                const page = await fetchPage(null);
+                const page = await fetchCards(null);
                 if (!active) return;
                 setPastes(page.cards);
                 setCursor(page.cursor);
@@ -131,7 +167,7 @@ function PublicPastes() {
     const loadMore = useCallback(async () => {
         setLoadingMore(true);
         try {
-            const page = await fetchPage(cursor);
+            const page = await fetchCards(cursor);
             setPastes((current) => {
                 // Guard against a paste created mid-scroll shifting the window.
                 const seen = new Set(current.map((paste) => paste.slug));
