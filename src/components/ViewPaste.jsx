@@ -1,6 +1,7 @@
 // src/components/ViewPaste.js
 import { useState, useEffect } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
+import AdSlot from './ads/AdSlot';
 import { ref, get, remove, runTransaction } from 'firebase/database';
 import { logEvent } from 'firebase/analytics';
 import { QRCodeSVG } from 'qrcode.react';
@@ -155,6 +156,7 @@ function ViewPaste() {
                             Paste created! The shareable link has been copied to your clipboard.
                         </div>
                     )}
+                    <AdSlot type='banner' />
                     <div className='paste-actions'>
                         <button className='copy-btn' onClick={handleCopy}>
                             <FaRegCopy size={15} />
@@ -222,6 +224,7 @@ function ViewPaste() {
                             Created on {formatCreatedAt(createdAt)} (your local time)
                         </p>
                     )}
+                    <AdSlot type='native' lazy />
                 </div>
             )}
         </div>

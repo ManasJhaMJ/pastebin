@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import HowToUse from './components/HowToUse';
 import WhyBinPaste from './components/WhyBinPaste';
 import RouteTracker from './components/RouteTracker';
+import SiteAds from './components/ads/SiteAds';
+import AdSlot from './components/ads/AdSlot';
 
 // Route-level code splitting: keep heavy deps (syntax highlighter, QR, etc.)
 // out of the initial homepage bundle.
@@ -31,10 +33,24 @@ function Home() {
   );
 }
 
+// Editorial / policy pages share one placement: a banner above the article and
+// a native widget below it. Feed and paste pages place their own slots.
+// eslint-disable-next-line react/prop-types -- plain JS project, no PropTypes in use
+function WithAds({ children }) {
+  return (
+    <>
+      <AdSlot type="banner" className="ad-slot-page-top" />
+      {children}
+      <AdSlot type="native" lazy className="ad-slot-page-bottom" />
+    </>
+  );
+}
+
 function App() {
   return (
     <Router>
       <RouteTracker />
+      <SiteAds />
       <div className="app-shell">
         <Navbar />
         <main className="main-content">
@@ -43,13 +59,13 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/find" element={<FindPaste />} />
               <Route path="/public" element={<PublicPastes />} />
-              <Route path="/pastebin-alternative" element={<PastebinAlternative />} />
-              <Route path="/guides" element={<Guides />} />
-              <Route path="/guides/:guideSlug" element={<Guide />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/pastebin-alternative" element={<WithAds><PastebinAlternative /></WithAds>} />
+              <Route path="/guides" element={<WithAds><Guides /></WithAds>} />
+              <Route path="/guides/:guideSlug" element={<WithAds><Guide /></WithAds>} />
+              <Route path="/terms" element={<WithAds><Terms /></WithAds>} />
+              <Route path="/privacy" element={<WithAds><Privacy /></WithAds>} />
+              <Route path="/about" element={<WithAds><About /></WithAds>} />
+              <Route path="/contact" element={<WithAds><Contact /></WithAds>} />
               <Route path="/:slug/raw" element={<RawPaste />} />
               <Route path="/:slug" element={<ViewPaste />} />
               <Route path="*" element={<ViewPaste />} />

@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { ref, query, orderByChild, limitToLast, endBefore, get } from 'firebase/database';
 import { db } from '../firebase';
 import { Link } from 'react-router-dom';
+import AdSlot from './ads/AdSlot';
 
 // Pastes fetched per request. Private ones are filtered out after they arrive,
 // so a request can yield fewer than this many cards - the scroll handler simply
@@ -214,6 +215,7 @@ function PublicPastes() {
     return (
         <div className='public'>
             <h1>Public Pastes</h1>
+            <AdSlot type='banner' />
             {searching ? (
                 <div className='loading'>
                     <span className='spinner' />
@@ -237,6 +239,7 @@ function PublicPastes() {
                             </div>
                         ))}
                     </div>
+                    <AdSlot type='native' lazy />
                     <div ref={sentinelRef} className='paste-sentinel' aria-hidden='true' />
                     {loadingMore && (
                         <div className='loading'>

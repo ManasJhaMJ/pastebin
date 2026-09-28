@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AdSlot from '../components/ads/AdSlot';
 
 function FindPaste() {
     const [slug, setSlug] = useState('');
@@ -29,6 +30,7 @@ function FindPaste() {
                 />
                 <button type='submit'>Find</button>
             </form>
+            <AdSlot type='rectangle' />
         </section>
     );
 }

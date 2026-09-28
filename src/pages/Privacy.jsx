@@ -1,7 +1,7 @@
 // src/pages/Privacy.js
 // Privacy Policy. Describes exactly what the app collects: Firebase Realtime
 // Database (paste content), Firebase/Google Analytics (page + paste events and
-// a random localStorage visitor id), Google AdSense cookies, and Vercel server
+// a random localStorage visitor id), Google AdSense / Adsterra cookies, and Vercel server
 // logs. Keep this in sync with src/firebase.js, RouteTracker.jsx and index.html.
 import { Link } from 'react-router-dom';
 
@@ -81,13 +81,15 @@ function Privacy() {
 
             <h2>5. Advertising and cookies</h2>
             <p>
-                BinPaste displays advertising served by Google AdSense in order to cover hosting
-                costs and keep the service free.
+                BinPaste displays advertising served by Google AdSense and Adsterra in order to
+                cover hosting costs and keep the service free. Adsterra units may include banners,
+                a native content widget, a social bar, and a popunder that opens one sponsored
+                page behind the current tab.
             </p>
             <ul>
                 <li>
-                    Third-party vendors, including Google, use cookies to serve ads based on your
-                    prior visits to this and other websites.
+                    Third-party vendors, including Google and Adsterra, use cookies to serve ads
+                    based on your prior visits to this and other websites.
                 </li>
                 <li>
                     Google&apos;s use of advertising cookies enables it and its partners to serve ads
