@@ -19,8 +19,8 @@ export const NATIVE_BANNER = {
     src: 'https://pl31556767.profitableratecpmnetwork.com/2e59f47a0e1fdc0c0797eb6215003ed3/invoke.js',
 };
 
-// Site-wide script; flip `enabled` to false to disable. Loads on the routes
-// allowed by adsAllowedOn() below. No popunder is used anywhere on the site.
+// Site-wide floating script; flip `enabled` to false to disable. Kept off the
+// homepage so the landing screen stays clear. No popunder is used anywhere.
 export const SOCIAL_BAR = {
     enabled: true,
     src: 'https://pl31556768.profitableratecpmnetwork.com/e0/03/30/e003308cfc7ddc0efb8b4f8228fe8c54.js',
@@ -29,10 +29,13 @@ export const SOCIAL_BAR = {
 export const SMARTLINK =
     'https://www.profitableratecpmnetwork.com/hktu5ve865?key=34f283627ab3cea5329da98f14e7351f';
 
-// On-page ads are shown everywhere except the homepage (the paste editor) and
-// the raw plain-text view, which exists precisely to be chrome-free.
+// On-page ads are shown everywhere except the raw plain-text view, which exists
+// precisely to be chrome-free. On the homepage they sit between the sections
+// below the editor, never above it.
 export function adsAllowedOn(pathname) {
-    if (pathname === '/') return false;
-    if (pathname.endsWith('/raw')) return false;
-    return true;
+    return !pathname.endsWith('/raw');
+}
+
+export function socialBarAllowedOn(pathname) {
+    return pathname !== '/' && adsAllowedOn(pathname);
 }

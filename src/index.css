@@ -1486,6 +1486,18 @@ ul.guide-list {
   margin: -1.5rem auto 2.5rem;
 }
 
+/* Homepage: between the how-to cards and the "Why BinPaste" section. */
+.ad-slot-home-mid {
+  width: 90%;
+  max-width: 900px;
+  margin: 3rem auto -1.5rem;
+}
+
+/* Inside an article, between two sub-sections. */
+.ad-slot-inline {
+  margin: 2.5rem auto;
+}
+
 #viewPaste .ad-slot-banner {
   margin-top: 0.25rem;
 }

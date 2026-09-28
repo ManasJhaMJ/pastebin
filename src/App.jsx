@@ -28,7 +28,10 @@ function Home() {
     <>
       <PasteForm />
       <HowToUse />
+      {/* Homepage ads sit between the sections below the editor, never above it. */}
+      <AdSlot type="banner" className="ad-slot-home-mid" />
       <WhyBinPaste />
+      <AdSlot type="native" lazy className="ad-slot-page-bottom" />
     </>
   );
 }

@@ -2,6 +2,7 @@
 // Visible homepage content - mirrors the FAQ/SoftwareApplication structured
 // data in index.html so search engines and AI assistants have crawlable text.
 import { Link } from 'react-router-dom';
+import AdSlot from './ads/AdSlot';
 import { GUIDES } from '../pages/guidesData';
 import { UPDATES } from './changelog';
 
@@ -60,6 +61,8 @@ function WhyBinPaste() {
                     </details>
                 ))}
             </div>
+
+            <AdSlot type="rectangle" lazy className="ad-slot-inline" />
 
             <h2 id="blogs">Helpful guides</h2>
             {/* A sample only. The full list, grouped by topic, is on /guides -
