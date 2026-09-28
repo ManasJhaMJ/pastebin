@@ -83,8 +83,7 @@ function Privacy() {
             <p>
                 BinPaste displays advertising served by Google AdSense and Adsterra in order to
                 cover hosting costs and keep the service free. Adsterra units may include banners,
-                a native content widget, a social bar, and a popunder that opens one sponsored
-                page behind the current tab.
+                a native content widget, and a social bar.
             </p>
             <ul>
                 <li>

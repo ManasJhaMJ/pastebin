@@ -19,14 +19,8 @@ export const NATIVE_BANNER = {
     src: 'https://pl31556767.profitableratecpmnetwork.com/2e59f47a0e1fdc0c0797eb6215003ed3/invoke.js',
 };
 
-// Site-wide scripts; flip `enabled` to false to disable either one.
-// The popunder runs on every page, including the homepage. The social bar and
-// all on-page units follow adsAllowedOn() below.
-export const POPUNDER = {
-    enabled: true,
-    src: 'https://pl31556770.profitableratecpmnetwork.com/0b/62/98/0b6298166785271c3e81359fce18c8ad.js',
-};
-
+// Site-wide script; flip `enabled` to false to disable. Loads on the routes
+// allowed by adsAllowedOn() below. No popunder is used anywhere on the site.
 export const SOCIAL_BAR = {
     enabled: true,
     src: 'https://pl31556768.profitableratecpmnetwork.com/e0/03/30/e003308cfc7ddc0efb8b4f8228fe8c54.js',
