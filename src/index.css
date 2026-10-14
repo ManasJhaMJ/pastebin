@@ -1473,6 +1473,13 @@ ul.guide-list {
   max-width: 1100px;
 }
 
+.ad-native-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+
 /* Editorial pages: match .content-section's width and rhythm. */
 .ad-slot-page-top {
   width: 90%;

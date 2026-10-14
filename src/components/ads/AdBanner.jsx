@@ -1,20 +1,17 @@
 /* eslint-disable react/prop-types -- plain JS project, no PropTypes in use */
 import { useEffect, useState } from 'react';
 import { BANNERS, BANNER_SCRIPT_HOST } from './adConfig';
+import { AD_SANDBOX, buildAdDocument } from './adFrame';
 
 // The network's invoke.js reads a global `atOptions` at load time and writes
 // its iframe with document.write. Neither works reliably in a React tree with
-// several units on one page, so each banner gets its own same-origin iframe
+// several units on one page, so each banner gets its own sandboxed iframe
 // (srcdoc) with a private global scope and a document that is still open.
 function buildSrcDoc({ key, width, height }) {
-    return [
-        '<!doctype html><html><head><meta charset="utf-8">',
-        '<style>html,body{margin:0;padding:0;overflow:hidden;background:transparent}</style>',
-        '</head><body>',
-        `<script>atOptions={'key':'${key}','format':'iframe','height':${height},'width':${width},'params':{}};</script>`,
-        `<script src="${BANNER_SCRIPT_HOST}/${key}/invoke.js"></script>`,
-        '</body></html>',
-    ].join('');
+    return buildAdDocument(
+        `<script>atOptions={'key':'${key}','format':'iframe','height':${height},'width':${width},'params':{}};</script>` +
+            `<script src="${BANNER_SCRIPT_HOST}/${key}/invoke.js"></script>`
+    );
 }
 
 function AdBanner({ size, lazy = false, className = '' }) {
@@ -25,6 +22,7 @@ function AdBanner({ size, lazy = false, className = '' }) {
             title="Advertisement"
             className={`ad-banner ${className}`.trim()}
             srcDoc={buildSrcDoc(unit)}
+            sandbox={AD_SANDBOX}
             width={unit.width}
             height={unit.height}
             style={{ width: unit.width, height: unit.height }}

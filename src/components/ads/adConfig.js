@@ -19,10 +19,11 @@ export const NATIVE_BANNER = {
     src: 'https://pl31556767.profitableratecpmnetwork.com/2e59f47a0e1fdc0c0797eb6215003ed3/invoke.js',
 };
 
-// Site-wide floating script; flip `enabled` to false to disable. Kept off the
-// homepage so the landing screen stays clear. No popunder is used anywhere.
+// Site-wide floating script. Disabled: unlike the units above it has to run in
+// the page itself (it cannot be sandboxed), so it can redirect visitors
+// away from the site. Keep it off unless the network can guarantee no redirects.
 export const SOCIAL_BAR = {
-    enabled: true,
+    enabled: false,
     src: 'https://pl31556768.profitableratecpmnetwork.com/e0/03/30/e003308cfc7ddc0efb8b4f8228fe8c54.js',
 };
 
